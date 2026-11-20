@@ -1,0 +1,39 @@
+GÜN 50 – MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
+
+Bu çalışmada üç farklı makine öğrenmesi modelinin 59 günlük satış tahminlerini karşılaştırdım. İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını inceledim.
+
+**1. Tahmin Sonuçları**
+
+Üç model de 139 mağaza için toplam 8.201 satış tahmini oluşturdu.
+
+- İlk Random Forest: 465.375,62
+- İyileştirilmiş Random Forest: 461.598,54
+- HistGradientBoosting: 443.460,94
+
+En yüksek toplam satış tahminini ilk Random Forest modeli oluşturdu. En düşük toplam tahmini ise HistGradientBoosting modeli verdi.
+
+**2. Grafik Analizi**
+
+Üç modelin günlük satış tahminlerini aynı grafik üzerinde karşılaştırdım.
+
+Grafikte modellerin genel olarak benzer değişimler gösterdiğini gördüm. Yaklaşık yedi günde bir satış tahminlerinde yükselişler oluştu.
+
+Aralık ayında üç modelin tahminleri de kasım ayına göre daha yüksek seviyelere ulaştı. Özellikle ilk Random Forest modelinin aralık ayındaki bazı günlük tahminleri diğer modellerden daha yüksekti.
+
+HistGradientBoosting modeli ise genel olarak daha düşük satış tahminleri oluşturdu.
+
+**3. Model Değerlendirmesi**
+
+İyileştirilmiş Random Forest modeli, ilk Random Forest modeline yakın tahminler üretti.
+
+Önceki test çalışmalarında iyileştirilmiş Random Forest modelinin hata değerlerinde gelişme görülmüştü. Bu nedenle iyileştirilmiş Random Forest modelini projemiz için güçlü bir aday olarak değerlendiriyorum.
+
+Ancak bu grafikte gerçek satış değerleri bulunmadığı için yalnızca grafik üzerinden hangi modelin daha doğru olduğunu belirleyemem.
+
+**4. Sonuç**
+
+Bu çalışmada üç modelin 59 günlük satış tahminlerini karşılaştırdım. Sonuçları CSV dosyalarına kaydettim ve günlük satış tahminlerini grafik üzerinde gösterdim.
+
+Modellerin benzer dönemlerde yükseliş ve düşüşler gösterdiğini, ancak tahmin miktarlarının farklı olduğunu gördüm.
+
+Bu karşılaştırma sayesinde modellerin tahmin davranışlarını daha iyi inceleme fırsatı buldum.

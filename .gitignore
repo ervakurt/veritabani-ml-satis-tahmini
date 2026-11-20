@@ -1,0 +1,29 @@
+
+# Sanal ortam
+venv/
+.venv/
+
+# Python gecici dosyalari
+__pycache__/
+*.pyc
+
+# Gizli bilgiler
+.env
+.env.*
+*.key
+
+# VS Code ve IntelliJ dosyalari
+.vscode/
+.idea/
+
+# Jupyter gecici dosyalari
+.ipynb_checkpoints/
+
+# Buyuk veri dosyalari
+data/*.csv
+
+# Egitilmis modeller
+models/*.pkl
+
+# Gecici dosyalar
+*.log

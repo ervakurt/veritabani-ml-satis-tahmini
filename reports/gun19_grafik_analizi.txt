@@ -1,0 +1,19 @@
+GÜN 19 - SATIŞ TAHMİNLERİNİN GRAFİKLE KARŞILAŞTIRILMASI
+
+Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini grafik üzerinde karşılaştırdım.
+
+Python'da Pandas ve Matplotlib kütüphanelerini kullandım.
+
+Her gün için 139 mağazanın toplam tahmini satış miktarını hesapladım.
+
+Random Forest modelini mavi, HistGradientBoosting modelini turuncu çizgiyle gösterdim.
+
+Grafikte iki modelin benzer satış değişimleri tahmin ettiğini gördüm.
+
+Random Forest modeli çoğu gün daha yüksek satış tahmin etti.
+
+Aralık ayında bazı günlerde satış tahminlerinin Kasım ayına göre daha yüksek olduğunu gözlemledim.
+
+Grafiği reports/gun19_model_karsilastirma.png dosyasına kaydettim.
+
+Bu grafik sayesinde iki modelin tahminlerini daha kolay karşılaştırabildim.

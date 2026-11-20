@@ -1,0 +1,28 @@
+GÜN 16 - MAKİNE ÖĞRENMESİ MODELLERİNİN KARŞILAŞTIRILMASI
+
+Bugün HistGradientBoosting algoritmasını kullanarak yeni bir satış tahmin modeli oluşturdum.
+
+Modeli 622.454 eğitim verisiyle eğittim ve 286.304 test verisi üzerinde değerlendirdim.
+
+Random Forest sonuçları:
+MAE: 14.77
+RMSE: 31.18
+R2: 0.720
+
+HistGradientBoosting sonuçları:
+MAE: 14.81
+RMSE: 30.75
+R2: 0.728
+
+HistGradientBoosting mağaza bazında MAE sonuçları:
+S0020: 35.88
+S0026: 37.62
+S0085: 79.71
+
+HistGradientBoosting modelinin RMSE ve R2 sonuçları daha iyi çıktı. MAE değeri ise Random Forest modelinden biraz daha yüksek.
+
+Özellikle S0085 mağazasında tahmin hatasının azaldığını gördüm.
+
+Yeni modeli models/hist_gradient_modeli.pkl dosyasına kaydettim.
+
+Sonuç olarak HistGradientBoosting modelini gelecekteki satış tahminleri için güçlü bir aday olarak belirledim. Nihai model seçimini ek değerlendirmelerden sonra yapacağım.

@@ -1,0 +1,21 @@
+GÜN 20 - S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
+
+Bugün S0085 mağazasının 59 günlük satış tahminlerini inceledim.
+
+Random Forest ve HistGradientBoosting modellerinin tahminlerini aynı grafikte karşılaştırdım.
+
+Random Forest toplam satış tahmini: 34475.06
+
+HistGradientBoosting toplam satış tahmini: 25000.83
+
+İki model arasında 9474.24 adet satış farkı oluştu.
+
+Kasım ayında iki modelin tahminleri birbirine daha yakınken Aralık ayında farkların arttığını gördüm.
+
+Random Forest modeli bazı günlerde 1000'in üzerinde satış tahmin etti. HistGradientBoosting modelinin en yüksek günlük tahminleri ise yaklaşık 660 seviyesinde kaldı.
+
+Daha önce yaptığım tarihsel testlerde HistGradientBoosting modelinin S0085 mağazasındaki tahmin hatası daha düşüktü.
+
+Ancak gelecekteki gerçek satışlar elimde olmadığı için hangi tahminin daha doğru olduğunu kesin olarak belirleyemiyorum.
+
+Grafiği reports/gun20_S0085_tahmin_grafigi.png dosyasına kaydettim.

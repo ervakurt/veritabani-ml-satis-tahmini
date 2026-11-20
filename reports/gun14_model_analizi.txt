@@ -1,0 +1,47 @@
+# Gün 14 - Model Performans ve Hata Analizi
+
+**Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
+
+## 1. Çalışmanın Amacı
+
+Bugün Random Forest modelimin satış tahminlerini inceleyerek ne kadar doğru sonuç verdiğini kontrol ettim. Özellikle yüksek satış yapan mağazalarda modelin tahmin hatalarını araştırdım.
+
+## 2. Genel Model Sonuçları
+
+- Test verisi: 286.304 kayıt
+- MAE: 15,12
+- RMSE: 32,54
+- Gerçek satış ortalaması: 53,67
+- Tahmini satış ortalaması: 55,05
+
+Modelin genel olarak gerçek satışlardan biraz daha yüksek tahmin yaptığını gördüm.
+
+## 3. Mağaza Bazında Hata Analizi
+
+Üç mağazanın sonuçlarını ayrıca inceledim.
+
+| Mağaza | MAE | RMSE |
+|---|---|---|
+| S0020 | 41,54 | 68,61 |
+| S0026 | 44,79 | 70,01 |
+| S0085 | 108,58 | 152,72 |
+
+S0085 mağazasındaki hata miktarının diğer mağazalardan daha yüksek olduğunu gördüm.
+
+## 4. Tahmin Sapması
+
+S0020 mağazasında tahminlerin %62,47'si, S0026 mağazasında %75,88'i ve S0085 mağazasında %77,63'ü gerçek satışlardan yüksek çıktı.
+
+S0085 mağazasında ortalama tahmin farkı +75,74 olarak hesaplandı.
+
+## 5. Mevsimsel Satış Analizi
+
+S0085 mağazasının 2017 ve 2018 yıllarındaki kasım ve aralık satışlarını karşılaştırdım. Her iki yılda da aralık ayında satışların arttığını gördüm.
+
+Modelin 2019 aralık ayı için tahmin ettiği artış ise geçmiş yıllardakinden daha yüksek çıktı.
+
+## 6. Sonuç
+
+Random Forest modelimin genel hata sonuçlarını yeniden hesapladım ve önceki sonuçlarla aynı olduğunu doğruladım. Ancak bazı mağazalarda tahmin hatalarının yüksek olduğunu gördüm.
+
+Sonraki çalışmalarımda modelin bu hatalarını azaltmaya ve tahminlerin güvenilirliğini artırmaya odaklanacağım.

@@ -1,0 +1,56 @@
+# Gün 15 - Makine Öğrenmesi Modelinin İyileştirilmesi
+
+**Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
+
+## 1. Çalışmanın Amacı
+
+Bugün daha önce oluşturduğum Random Forest modelinin tahmin hatalarını azaltmak için farklı parametrelerle yeni bir model eğittim. Eski modelimi koruyarak iki modelin sonuçlarını karşılaştırdım.
+
+## 2. Modelde Yaptığım Değişiklikler
+
+Yeni modelde aşağıdaki parametreleri kullandım:
+
+- n_estimators = 100
+- max_depth = 20
+- min_samples_leaf = 5
+- max_features = 0.8
+
+Modeli 622.454 eğitim kaydıyla eğittim ve 286.304 test kaydıyla değerlendirdim.
+
+## 3. Model Performanslarının Karşılaştırılması
+
+| Ölçüt | Eski Model | Yeni Model |
+|---|---|---|
+| MAE | 15,12 | 14,77 |
+| RMSE | 32,54 | 31,18 |
+| R² | 0,695 | 0,720 |
+
+Yeni modelde MAE yaklaşık %2,3, RMSE ise yaklaşık %4,2 azaldı. R² değeri de yükseldi.
+
+## 4. Mağaza Bazında Hata Analizi
+
+| Mağaza | Eski MAE | Yeni MAE |
+|---|---|---|
+| S0020 | 41,54 | 39,61 |
+| S0026 | 44,79 | 41,54 |
+| S0085 | 108,58 | 99,54 |
+
+Üç mağazanın tamamında ortalama mutlak tahmin hatasının azaldığını gördüm.
+
+## 5. Tahmin Sapması Analizi
+
+Yeni modelin yüksek tahmin oranlarını hesapladım:
+
+- S0020: %62,76
+- S0026: %78,16
+- S0085: %76,61
+
+S0085 mağazasındaki ortalama tahmin farkı eski modelde +75,74 iken yeni modelde +59,35 oldu.
+
+Ancak bazı mağazalarda satışları yüksek tahmin etme eğiliminin devam ettiğini gördüm.
+
+## 6. Sonuç
+
+Yeni Random Forest modelim, eski modele göre daha düşük hata değerleri verdi. Özellikle yüksek satış yapan S0085 mağazasında iyileşme sağladım.
+
+Yeni modeli `models/iyilestirilmis_random_forest.pkl` dosyasına kaydettim. Sonraki çalışmalarda farklı modeller deneyerek tahmin başarısını artırmayı hedefliyorum.

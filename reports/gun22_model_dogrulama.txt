@@ -1,0 +1,84 @@
+
+GUN 22 - MODEL DOGRULAMA RAPORU
+
+1. EGITIM VE TEST VERILERI
+
+Egitim kayit sayisi: 622454
+Test kayit sayisi: 286304
+
+Egitim donemi: 2017-05-01 / 2018-12-31
+Test donemi: 2019-01-07 / 2019-10-30
+
+2. TEKRARLANAN HEDEFLER
+
+Toplam test kaydi: 286304
+Benzersiz magaza-tahmin tarihi: 41369
+Tekrarlanan hedef kayit sayisi: 244935
+
+3. TAHMIN TARIHLERI
+
+Baslangictan onceki hedefler: 0
+Baslangicla ayni gun hedefleri: 4860
+Baslangictan sonraki hedefler: 281444
+
+Tahmin gunleri: 1-59
+Birinci tahmin gunu baslangic tarihini temsil ediyor.
+
+4. GECMIS ORTALAMALAR
+
+Kontrol edilen grup: 4860
+
+7 gunluk farkli grup: 0
+28 gunluk farkli grup: 0
+59 gunluk farkli grup: 0
+
+Gecmis ortalamalar, tahmin baslangicindan
+onceki satis verileriyle uyumludur.
+
+5. DEGERLENDIRME
+
+Egitim ve test donemleri tarihsel olarak ayridir.
+
+Gecmis satis ortalamalarinin kaynak verilerle
+uyumlu oldugu dogrulanmistir.
+
+Test verilerinde ayni hedef tarihe ait birden
+fazla tahmin bulunmaktadir.
+
+Bu nedenle model performansinin tekrarlanan
+hedefler dikkate alinarak yeniden incelenmesi
+gerekmektedir.
+
+Modelin nihai dogrulamasi henuz tamamlanmamistir.
+
+6. MODEL PERFORMANS KARSILASTIRMASI
+
+Tum test kayitlari:
+Random Forest: MAE 14.77, RMSE 31.18, R2 0.720
+HistGradientBoosting: MAE 14.81, RMSE 30.75, R2 0.728
+
+Benzersiz hedeflerin ortalamasi:
+Random Forest: MAE 14.03, RMSE 29.12, R2 0.752
+HistGradientBoosting: MAE 14.32, RMSE 29.36, R2 0.748
+
+Tek baslangic tarihi (2019-09-02):
+Test kayit sayisi: 8357
+
+Random Forest: MAE 14.61, RMSE 25.18, R2 0.786
+HistGradientBoosting: MAE 15.22, RMSE 25.92, R2 0.773
+
+7. GENEL SONUC
+
+Gecmis satis ortalamalari kaynak verilerle uyumludur.
+
+Model performansi degerlendirme yontemine gore
+degismektedir.
+
+Tek baslangic tarihi ve benzersiz hedef
+degerlendirmelerinde Random Forest daha basarilidir.
+
+Bu nedenle iyilestirilmis Random Forest modeli,
+nihai model icin guclu aday olarak belirlenmistir.
+
+Nihai model secimi icin farkli baslangic tarihlerinde
+ek performans kontrolleri yapilabilir.

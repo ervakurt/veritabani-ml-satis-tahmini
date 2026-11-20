@@ -1,0 +1,75 @@
+GÜN 58 – MAĞAZA BAZLI MODEL KARŞILAŞTIRMA ANALİZİ
+
+**1. Çalışmanın Amacı**
+
+Bu çalışmada üç farklı makine öğrenmesi modelinin mağaza bazlı satış tahminlerini karşılaştırdım.
+
+İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını PostgreSQL üzerinden inceledim.
+
+Amacım modellerin aynı mağazalar için ne kadar farklı satış tahminleri oluşturduğunu belirlemekti.
+
+**2. PostgreSQL Üzerinden Karşılaştırma**
+
+Üç modelin tahminlerini PostgreSQL veritabanına kaydettim.
+
+SQL sorguları kullanarak 139 mağazanın 59 günlük toplam satış tahminlerini karşılaştırdım.
+
+Modellerin genel toplam tahminleri şu şekilde oluştu:
+
+- İlk Random Forest: 465.375,62
+- İyileştirilmiş Random Forest: 461.598,54
+- HistGradientBoosting: 443.460,94
+
+En yüksek toplam satış tahminini ilk Random Forest modeli oluşturdu.
+
+**3. Mağaza Bazlı Tahmin Farkları**
+
+İyileştirilmiş Random Forest ve HistGradientBoosting modelleri arasındaki mutlak farkları hesapladım.
+
+En büyük farkların görüldüğü mağazalar:
+
+- S0085: 5.553,19
+- S0097: 1.856,39
+- S0038: 1.561,38
+- S0020: 1.339,84
+- S0028: 853,28
+
+En büyük mutlak fark S0085 mağazasında oluştu.
+
+Bu mağaza için İyileştirilmiş Random Forest modeli 30.554,02, HistGradientBoosting modeli ise 25.000,83 satış tahmini oluşturdu.
+
+**4. Yüzdesel Fark Analizi**
+
+Modellerin tahminlerini yüzdesel olarak da karşılaştırdım.
+
+En büyük yüzdesel farklar:
+
+- S0006: %37,60
+- S0142: %37,31
+- S0086: %23,47
+- S0085: %22,21
+- S0119: %21,96
+
+Yüzdesel farkı hesaplarken HistGradientBoosting modelinin tahminlerini temel aldım.
+
+En büyük yüzdesel fark S0006 mağazasında görüldü. En büyük mutlak fark ise S0085 mağazasında oluştu.
+
+Bu sonuçlar, mutlak fark ile yüzdesel farkın farklı bilgiler verdiğini gösterdi.
+
+**5. Model Değerlendirmesi**
+
+Üç modelin bazı mağazalarda birbirine yakın, bazı mağazalarda ise oldukça farklı tahminler oluşturduğunu gördüm.
+
+Önceki test sonuçlarında İyileştirilmiş Random Forest modeli başarılı sonuçlar verdiği için bu modeli projemde güçlü bir aday olarak değerlendiriyorum.
+
+Ancak bu çalışmada geleceğe yönelik tahminleri karşılaştırdım. Gerçek satış sonuçları bulunmadığı için yalnızca bu karşılaştırmayla hangi modelin daha doğru olduğunu belirleyemem.
+
+**6. Sonuç**
+
+Bu çalışmada PostgreSQL üzerinde SQL sorguları kullanarak üç modelin satış tahminlerini karşılaştırdım.
+
+139 mağazanın tahminlerini inceledim ve modeller arasındaki en büyük mutlak ve yüzdesel farkları belirledim.
+
+Bu analiz sayesinde modellerin farklı mağazalardaki tahmin davranışlarını daha ayrıntılı değerlendirdim.
+
+Ayrıca makine öğrenmesi sonuçlarının PostgreSQL üzerinde saklanabildiğini ve SQL sorgularıyla analiz edilebildiğini gösterdim.

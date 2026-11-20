@@ -1,0 +1,19 @@
+GÜN 18 - SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
+
+Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini karşılaştırdım.
+
+Her iki model de 139 mağaza için toplam 8201 tahmin oluşturdu.
+
+Random Forest toplam tahmini satış: 465375.62
+
+HistGradientBoosting toplam tahmini satış: 443460.94
+
+İki model arasında 21914.68 adet fark oluştu.
+
+En büyük fark S0085 mağazasında görüldü. Random Forest bu mağaza için 34475.06, HistGradientBoosting ise 25000.83 adet satış tahmin etti.
+
+HistGradientBoosting modelinin tarihsel test sonuçlarında RMSE ve R2 değerleri daha iyi olduğu için bu modeli öncelikli aday olarak değerlendirdim.
+
+Ancak tahminlerin gerçek satışlarla karşılaştırılması henüz mümkün olmadığı için kesin doğruluk sonucu çıkarılamaz.
+
+Karşılaştırma sonuçlarını CSV dosyalarına kaydettim.

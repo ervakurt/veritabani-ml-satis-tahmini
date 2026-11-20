@@ -1,0 +1,30 @@
+ MAĞAZA BAZINDA SATIŞ TAHMİN ANALİZİ
+
+ S0020, S0026 ve S0038 mağazalarının 59 günlük satış tahminlerini inceledim.
+
+Random Forest ve HistGradientBoosting modellerinin sonuçlarını karşılaştırdım.
+
+S0020 mağazası:
+Random Forest: 13005.07
+HistGradientBoosting: 11868.08
+Fark: -1137.00
+
+S0026 mağazası:
+Random Forest: 13650.64
+HistGradientBoosting: 13088.24
+Fark: -562.40
+
+S0038 mağazası:
+Random Forest: 12617.83
+HistGradientBoosting: 9829.97
+Fark: -2787.86
+
+Üç mağazada da HistGradientBoosting modelinin daha düşük satış tahmini yaptığını gördüm.
+
+En büyük tahmin farkı S0038 mağazasında oluştu. En küçük fark ise S0026 mağazasında görüldü.
+
+Python'da Pandas ve Matplotlib kütüphanelerini kullanarak her mağaza için ayrı grafik oluşturdum.
+
+Grafikleri ve karşılaştırma sonuçlarını reports klasörüne kaydettim.
+
+Bu çalışma sayesinde modellerin farklı mağazalarda nasıl tahminler yaptığını daha ayrıntılı inceleyebildim.
