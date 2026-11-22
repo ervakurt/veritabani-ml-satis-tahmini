@@ -1,0 +1,485 @@
+﻿========================================
+KAYNAK RAPOR: gun14_model_analizi.txt
+========================================
+# Gün 14 - Model Performans ve Hata Analizi
+
+**Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
+
+## 1. Çalışmanın Amacı
+
+Bugün Random Forest modelimin satış tahminlerini inceleyerek ne kadar doğru sonuç verdiğini kontrol ettim. Özellikle yüksek satış yapan mağazalarda modelin tahmin hatalarını araştırdım.
+
+## 2. Genel Model Sonuçları
+
+- Test verisi: 286.304 kayıt
+- MAE: 15,12
+- RMSE: 32,54
+- Gerçek satış ortalaması: 53,67
+- Tahmini satış ortalaması: 55,05
+
+Modelin genel olarak gerçek satışlardan biraz daha yüksek tahmin yaptığını gördüm.
+
+## 3. Mağaza Bazında Hata Analizi
+
+Üç mağazanın sonuçlarını ayrıca inceledim.
+
+| Mağaza | MAE | RMSE |
+|---|---|---|
+| S0020 | 41,54 | 68,61 |
+| S0026 | 44,79 | 70,01 |
+| S0085 | 108,58 | 152,72 |
+
+S0085 mağazasındaki hata miktarının diğer mağazalardan daha yüksek olduğunu gördüm.
+
+## 4. Tahmin Sapması
+
+S0020 mağazasında tahminlerin %62,47'si, S0026 mağazasında %75,88'i ve S0085 mağazasında %77,63'ü gerçek satışlardan yüksek çıktı.
+
+S0085 mağazasında ortalama tahmin farkı +75,74 olarak hesaplandı.
+
+## 5. Mevsimsel Satış Analizi
+
+S0085 mağazasının 2017 ve 2018 yıllarındaki kasım ve aralık satışlarını karşılaştırdım. Her iki yılda da aralık ayında satışların arttığını gördüm.
+
+Modelin 2019 aralık ayı için tahmin ettiği artış ise geçmiş yıllardakinden daha yüksek çıktı.
+
+## 6. Sonuç
+
+Random Forest modelimin genel hata sonuçlarını yeniden hesapladım ve önceki sonuçlarla aynı olduğunu doğruladım. Ancak bazı mağazalarda tahmin hatalarının yüksek olduğunu gördüm.
+
+Sonraki çalışmalarımda modelin bu hatalarını azaltmaya ve tahminlerin güvenilirliğini artırmaya odaklanacağım.
+
+========================================
+KAYNAK RAPOR: gun15_model_iyilestirme.txt
+========================================
+# Gün 15 - Makine Öğrenmesi Modelinin İyileştirilmesi
+
+**Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
+
+## 1. Çalışmanın Amacı
+
+Bugün daha önce oluşturduğum Random Forest modelinin tahmin hatalarını azaltmak için farklı parametrelerle yeni bir model eğittim. Eski modelimi koruyarak iki modelin sonuçlarını karşılaştırdım.
+
+## 2. Modelde Yaptığım Değişiklikler
+
+Yeni modelde aşağıdaki parametreleri kullandım:
+
+- n_estimators = 100
+- max_depth = 20
+- min_samples_leaf = 5
+- max_features = 0.8
+
+Modeli 622.454 eğitim kaydıyla eğittim ve 286.304 test kaydıyla değerlendirdim.
+
+## 3. Model Performanslarının Karşılaştırılması
+
+| Ölçüt | Eski Model | Yeni Model |
+|---|---|---|
+| MAE | 15,12 | 14,77 |
+| RMSE | 32,54 | 31,18 |
+| R² | 0,695 | 0,720 |
+
+Yeni modelde MAE yaklaşık %2,3, RMSE ise yaklaşık %4,2 azaldı. R² değeri de yükseldi.
+
+## 4. Mağaza Bazında Hata Analizi
+
+| Mağaza | Eski MAE | Yeni MAE |
+|---|---|---|
+| S0020 | 41,54 | 39,61 |
+| S0026 | 44,79 | 41,54 |
+| S0085 | 108,58 | 99,54 |
+
+Üç mağazanın tamamında ortalama mutlak tahmin hatasının azaldığını gördüm.
+
+## 5. Tahmin Sapması Analizi
+
+Yeni modelin yüksek tahmin oranlarını hesapladım:
+
+- S0020: %62,76
+- S0026: %78,16
+- S0085: %76,61
+
+S0085 mağazasındaki ortalama tahmin farkı eski modelde +75,74 iken yeni modelde +59,35 oldu.
+
+Ancak bazı mağazalarda satışları yüksek tahmin etme eğiliminin devam ettiğini gördüm.
+
+## 6. Sonuç
+
+Yeni Random Forest modelim, eski modele göre daha düşük hata değerleri verdi. Özellikle yüksek satış yapan S0085 mağazasında iyileşme sağladım.
+
+Yeni modeli `models/iyilestirilmis_random_forest.pkl` dosyasına kaydettim. Sonraki çalışmalarda farklı modeller deneyerek tahmin başarısını artırmayı hedefliyorum.
+
+========================================
+KAYNAK RAPOR: gun16_model_karsilastirma.txt
+========================================
+GÜN 16 - MAKİNE ÖĞRENMESİ MODELLERİNİN KARŞILAŞTIRILMASI
+
+Bugün HistGradientBoosting algoritmasını kullanarak yeni bir satış tahmin modeli oluşturdum.
+
+Modeli 622.454 eğitim verisiyle eğittim ve 286.304 test verisi üzerinde değerlendirdim.
+
+Random Forest sonuçları:
+MAE: 14.77
+RMSE: 31.18
+R2: 0.720
+
+HistGradientBoosting sonuçları:
+MAE: 14.81
+RMSE: 30.75
+R2: 0.728
+
+HistGradientBoosting mağaza bazında MAE sonuçları:
+S0020: 35.88
+S0026: 37.62
+S0085: 79.71
+
+HistGradientBoosting modelinin RMSE ve R2 sonuçları daha iyi çıktı. MAE değeri ise Random Forest modelinden biraz daha yüksek.
+
+Özellikle S0085 mağazasında tahmin hatasının azaldığını gördüm.
+
+Yeni modeli models/hist_gradient_modeli.pkl dosyasına kaydettim.
+
+Sonuç olarak HistGradientBoosting modelini gelecekteki satış tahminleri için güçlü bir aday olarak belirledim. Nihai model seçimini ek değerlendirmelerden sonra yapacağım.
+
+========================================
+KAYNAK RAPOR: gun17_model_secimi.txt
+========================================
+GÜN 17 - MODEL SEÇİMİ
+
+Bugün Random Forest ve HistGradientBoosting modellerinin sonuçlarını karşılaştırdım.
+
+Random Forest:
+MAE: 14.77
+RMSE: 31.18
+R2: 0.720
+Ortalama sapma: 1.35
+
+HistGradientBoosting:
+MAE: 14.81
+RMSE: 30.75
+R2: 0.728
+Ortalama sapma: 0.76
+
+Random Forest modelinin MAE değeri biraz daha iyi çıktı. Ancak HistGradientBoosting modelinin RMSE, R2 ve ortalama sapma sonuçları daha başarılı oldu.
+
+Bu nedenle HistGradientBoosting modelini öncelikli aday olarak belirledim.
+
+Nihai model seçimini ayrı bir doğrulama dönemi üzerinde kontrol ettikten sonra yapacağım.
+
+Karşılaştırma sonuçlarını gun17_model_karsilastirma.csv dosyasına kaydettim.
+
+========================================
+KAYNAK RAPOR: gun18_tahmin_analizi.txt
+========================================
+GÜN 18 - SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
+
+Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini karşılaştırdım.
+
+Her iki model de 139 mağaza için toplam 8201 tahmin oluşturdu.
+
+Random Forest toplam tahmini satış: 465375.62
+
+HistGradientBoosting toplam tahmini satış: 443460.94
+
+İki model arasında 21914.68 adet fark oluştu.
+
+En büyük fark S0085 mağazasında görüldü. Random Forest bu mağaza için 34475.06, HistGradientBoosting ise 25000.83 adet satış tahmin etti.
+
+HistGradientBoosting modelinin tarihsel test sonuçlarında RMSE ve R2 değerleri daha iyi olduğu için bu modeli öncelikli aday olarak değerlendirdim.
+
+Ancak tahminlerin gerçek satışlarla karşılaştırılması henüz mümkün olmadığı için kesin doğruluk sonucu çıkarılamaz.
+
+Karşılaştırma sonuçlarını CSV dosyalarına kaydettim.
+
+========================================
+KAYNAK RAPOR: gun19_grafik_analizi.txt
+========================================
+GÜN 19 - SATIŞ TAHMİNLERİNİN GRAFİKLE KARŞILAŞTIRILMASI
+
+Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini grafik üzerinde karşılaştırdım.
+
+Python'da Pandas ve Matplotlib kütüphanelerini kullandım.
+
+Her gün için 139 mağazanın toplam tahmini satış miktarını hesapladım.
+
+Random Forest modelini mavi, HistGradientBoosting modelini turuncu çizgiyle gösterdim.
+
+Grafikte iki modelin benzer satış değişimleri tahmin ettiğini gördüm.
+
+Random Forest modeli çoğu gün daha yüksek satış tahmin etti.
+
+Aralık ayında bazı günlerde satış tahminlerinin Kasım ayına göre daha yüksek olduğunu gözlemledim.
+
+Grafiği reports/gun19_model_karsilastirma.png dosyasına kaydettim.
+
+Bu grafik sayesinde iki modelin tahminlerini daha kolay karşılaştırabildim.
+
+========================================
+KAYNAK RAPOR: gun20_magaza_analizi.txt
+========================================
+GÜN 20 - S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
+
+Bugün S0085 mağazasının 59 günlük satış tahminlerini inceledim.
+
+Random Forest ve HistGradientBoosting modellerinin tahminlerini aynı grafikte karşılaştırdım.
+
+Random Forest toplam satış tahmini: 34475.06
+
+HistGradientBoosting toplam satış tahmini: 25000.83
+
+İki model arasında 9474.24 adet satış farkı oluştu.
+
+Kasım ayında iki modelin tahminleri birbirine daha yakınken Aralık ayında farkların arttığını gördüm.
+
+Random Forest modeli bazı günlerde 1000'in üzerinde satış tahmin etti. HistGradientBoosting modelinin en yüksek günlük tahminleri ise yaklaşık 660 seviyesinde kaldı.
+
+Daha önce yaptığım tarihsel testlerde HistGradientBoosting modelinin S0085 mağazasındaki tahmin hatası daha düşüktü.
+
+Ancak gelecekteki gerçek satışlar elimde olmadığı için hangi tahminin daha doğru olduğunu kesin olarak belirleyemiyorum.
+
+Grafiği reports/gun20_S0085_tahmin_grafigi.png dosyasına kaydettim.
+
+========================================
+KAYNAK RAPOR: gun21_magaza_analizi.txt
+========================================
+ MAĞAZA BAZINDA SATIŞ TAHMİN ANALİZİ
+
+ S0020, S0026 ve S0038 mağazalarının 59 günlük satış tahminlerini inceledim.
+
+Random Forest ve HistGradientBoosting modellerinin sonuçlarını karşılaştırdım.
+
+S0020 mağazası:
+Random Forest: 13005.07
+HistGradientBoosting: 11868.08
+Fark: -1137.00
+
+S0026 mağazası:
+Random Forest: 13650.64
+HistGradientBoosting: 13088.24
+Fark: -562.40
+
+S0038 mağazası:
+Random Forest: 12617.83
+HistGradientBoosting: 9829.97
+Fark: -2787.86
+
+Üç mağazada da HistGradientBoosting modelinin daha düşük satış tahmini yaptığını gördüm.
+
+En büyük tahmin farkı S0038 mağazasında oluştu. En küçük fark ise S0026 mağazasında görüldü.
+
+Python'da Pandas ve Matplotlib kütüphanelerini kullanarak her mağaza için ayrı grafik oluşturdum.
+
+Grafikleri ve karşılaştırma sonuçlarını reports klasörüne kaydettim.
+
+Bu çalışma sayesinde modellerin farklı mağazalarda nasıl tahminler yaptığını daha ayrıntılı inceleyebildim.
+
+========================================
+KAYNAK RAPOR: gun22_model_dogrulama.txt
+========================================
+
+GUN 22 - MODEL DOGRULAMA RAPORU
+
+1. EGITIM VE TEST VERILERI
+
+Egitim kayit sayisi: 622454
+Test kayit sayisi: 286304
+
+Egitim donemi: 2017-05-01 / 2018-12-31
+Test donemi: 2019-01-07 / 2019-10-30
+
+2. TEKRARLANAN HEDEFLER
+
+Toplam test kaydi: 286304
+Benzersiz magaza-tahmin tarihi: 41369
+Tekrarlanan hedef kayit sayisi: 244935
+
+3. TAHMIN TARIHLERI
+
+Baslangictan onceki hedefler: 0
+Baslangicla ayni gun hedefleri: 4860
+Baslangictan sonraki hedefler: 281444
+
+Tahmin gunleri: 1-59
+Birinci tahmin gunu baslangic tarihini temsil ediyor.
+
+4. GECMIS ORTALAMALAR
+
+Kontrol edilen grup: 4860
+
+7 gunluk farkli grup: 0
+28 gunluk farkli grup: 0
+59 gunluk farkli grup: 0
+
+Gecmis ortalamalar, tahmin baslangicindan
+onceki satis verileriyle uyumludur.
+
+5. DEGERLENDIRME
+
+Egitim ve test donemleri tarihsel olarak ayridir.
+
+Gecmis satis ortalamalarinin kaynak verilerle
+uyumlu oldugu dogrulanmistir.
+
+Test verilerinde ayni hedef tarihe ait birden
+fazla tahmin bulunmaktadir.
+
+Bu nedenle model performansinin tekrarlanan
+hedefler dikkate alinarak yeniden incelenmesi
+gerekmektedir.
+
+Modelin nihai dogrulamasi henuz tamamlanmamistir.
+
+6. MODEL PERFORMANS KARSILASTIRMASI
+
+Tum test kayitlari:
+Random Forest: MAE 14.77, RMSE 31.18, R2 0.720
+HistGradientBoosting: MAE 14.81, RMSE 30.75, R2 0.728
+
+Benzersiz hedeflerin ortalamasi:
+Random Forest: MAE 14.03, RMSE 29.12, R2 0.752
+HistGradientBoosting: MAE 14.32, RMSE 29.36, R2 0.748
+
+Tek baslangic tarihi (2019-09-02):
+Test kayit sayisi: 8357
+
+Random Forest: MAE 14.61, RMSE 25.18, R2 0.786
+HistGradientBoosting: MAE 15.22, RMSE 25.92, R2 0.773
+
+7. GENEL SONUC
+
+Gecmis satis ortalamalari kaynak verilerle uyumludur.
+
+Model performansi degerlendirme yontemine gore
+degismektedir.
+
+Tek baslangic tarihi ve benzersiz hedef
+degerlendirmelerinde Random Forest daha basarilidir.
+
+Bu nedenle iyilestirilmis Random Forest modeli,
+nihai model icin guclu aday olarak belirlenmistir.
+
+Nihai model secimi icin farkli baslangic tarihlerinde
+ek performans kontrolleri yapilabilir.
+
+========================================
+KAYNAK RAPOR: gun50_grafik_analizi.txt
+========================================
+GÜN 50 – MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
+
+Bu çalışmada üç farklı makine öğrenmesi modelinin 59 günlük satış tahminlerini karşılaştırdım. İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını inceledim.
+
+**1. Tahmin Sonuçları**
+
+Üç model de 139 mağaza için toplam 8.201 satış tahmini oluşturdu.
+
+- İlk Random Forest: 465.375,62
+- İyileştirilmiş Random Forest: 461.598,54
+- HistGradientBoosting: 443.460,94
+
+En yüksek toplam satış tahminini ilk Random Forest modeli oluşturdu. En düşük toplam tahmini ise HistGradientBoosting modeli verdi.
+
+**2. Grafik Analizi**
+
+Üç modelin günlük satış tahminlerini aynı grafik üzerinde karşılaştırdım.
+
+Grafikte modellerin genel olarak benzer değişimler gösterdiğini gördüm. Yaklaşık yedi günde bir satış tahminlerinde yükselişler oluştu.
+
+Aralık ayında üç modelin tahminleri de kasım ayına göre daha yüksek seviyelere ulaştı. Özellikle ilk Random Forest modelinin aralık ayındaki bazı günlük tahminleri diğer modellerden daha yüksekti.
+
+HistGradientBoosting modeli ise genel olarak daha düşük satış tahminleri oluşturdu.
+
+**3. Model Değerlendirmesi**
+
+İyileştirilmiş Random Forest modeli, ilk Random Forest modeline yakın tahminler üretti.
+
+Önceki test çalışmalarında iyileştirilmiş Random Forest modelinin hata değerlerinde gelişme görülmüştü. Bu nedenle iyileştirilmiş Random Forest modelini projemiz için güçlü bir aday olarak değerlendiriyorum.
+
+Ancak bu grafikte gerçek satış değerleri bulunmadığı için yalnızca grafik üzerinden hangi modelin daha doğru olduğunu belirleyemem.
+
+**4. Sonuç**
+
+Bu çalışmada üç modelin 59 günlük satış tahminlerini karşılaştırdım. Sonuçları CSV dosyalarına kaydettim ve günlük satış tahminlerini grafik üzerinde gösterdim.
+
+Modellerin benzer dönemlerde yükseliş ve düşüşler gösterdiğini, ancak tahmin miktarlarının farklı olduğunu gördüm.
+
+Bu karşılaştırma sayesinde modellerin tahmin davranışlarını daha iyi inceleme fırsatı buldum.
+
+========================================
+KAYNAK RAPOR: gun58_magaza_model_karsilastirma_analizi.txt
+========================================
+GÜN 58 – MAĞAZA BAZLI MODEL KARŞILAŞTIRMA ANALİZİ
+
+**1. Çalışmanın Amacı**
+
+Bu çalışmada üç farklı makine öğrenmesi modelinin mağaza bazlı satış tahminlerini karşılaştırdım.
+
+İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını PostgreSQL üzerinden inceledim.
+
+Amacım modellerin aynı mağazalar için ne kadar farklı satış tahminleri oluşturduğunu belirlemekti.
+
+**2. PostgreSQL Üzerinden Karşılaştırma**
+
+Üç modelin tahminlerini PostgreSQL veritabanına kaydettim.
+
+SQL sorguları kullanarak 139 mağazanın 59 günlük toplam satış tahminlerini karşılaştırdım.
+
+Modellerin genel toplam tahminleri şu şekilde oluştu:
+
+- İlk Random Forest: 465.375,62
+- İyileştirilmiş Random Forest: 461.598,54
+- HistGradientBoosting: 443.460,94
+
+En yüksek toplam satış tahminini ilk Random Forest modeli oluşturdu.
+
+**3. Mağaza Bazlı Tahmin Farkları**
+
+İyileştirilmiş Random Forest ve HistGradientBoosting modelleri arasındaki mutlak farkları hesapladım.
+
+En büyük farkların görüldüğü mağazalar:
+
+- S0085: 5.553,19
+- S0097: 1.856,39
+- S0038: 1.561,38
+- S0020: 1.339,84
+- S0028: 853,28
+
+En büyük mutlak fark S0085 mağazasında oluştu.
+
+Bu mağaza için İyileştirilmiş Random Forest modeli 30.554,02, HistGradientBoosting modeli ise 25.000,83 satış tahmini oluşturdu.
+
+**4. Yüzdesel Fark Analizi**
+
+Modellerin tahminlerini yüzdesel olarak da karşılaştırdım.
+
+En büyük yüzdesel farklar:
+
+- S0006: %37,60
+- S0142: %37,31
+- S0086: %23,47
+- S0085: %22,21
+- S0119: %21,96
+
+Yüzdesel farkı hesaplarken HistGradientBoosting modelinin tahminlerini temel aldım.
+
+En büyük yüzdesel fark S0006 mağazasında görüldü. En büyük mutlak fark ise S0085 mağazasında oluştu.
+
+Bu sonuçlar, mutlak fark ile yüzdesel farkın farklı bilgiler verdiğini gösterdi.
+
+**5. Model Değerlendirmesi**
+
+Üç modelin bazı mağazalarda birbirine yakın, bazı mağazalarda ise oldukça farklı tahminler oluşturduğunu gördüm.
+
+Önceki test sonuçlarında İyileştirilmiş Random Forest modeli başarılı sonuçlar verdiği için bu modeli projemde güçlü bir aday olarak değerlendiriyorum.
+
+Ancak bu çalışmada geleceğe yönelik tahminleri karşılaştırdım. Gerçek satış sonuçları bulunmadığı için yalnızca bu karşılaştırmayla hangi modelin daha doğru olduğunu belirleyemem.
+
+**6. Sonuç**
+
+Bu çalışmada PostgreSQL üzerinde SQL sorguları kullanarak üç modelin satış tahminlerini karşılaştırdım.
+
+139 mağazanın tahminlerini inceledim ve modeller arasındaki en büyük mutlak ve yüzdesel farkları belirledim.
+
+Bu analiz sayesinde modellerin farklı mağazalardaki tahmin davranışlarını daha ayrıntılı değerlendirdim.
+
+Ayrıca makine öğrenmesi sonuçlarının PostgreSQL üzerinde saklanabildiğini ve SQL sorgularıyla analiz edilebildiğini gösterdim.
+
