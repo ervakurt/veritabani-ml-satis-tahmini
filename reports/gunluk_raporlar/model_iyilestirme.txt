@@ -1,4 +1,4 @@
-# Gün 15 - Makine Öğrenmesi Modelinin İyileştirilmesi
+﻿# Makine Öğrenmesi Modelinin İyileştirilmesi
 
 **Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
 

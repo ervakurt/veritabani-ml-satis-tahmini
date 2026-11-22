@@ -1,5 +1,5 @@
-
-GUN 22 - MODEL DOGRULAMA RAPORU
+﻿
+MODEL DOGRULAMA RAPORU
 
 1. EGITIM VE TEST VERILERI
 
@@ -82,3 +82,4 @@ nihai model icin guclu aday olarak belirlenmistir.
 
 Nihai model secimi icin farkli baslangic tarihlerinde
 ek performans kontrolleri yapilabilir.
+

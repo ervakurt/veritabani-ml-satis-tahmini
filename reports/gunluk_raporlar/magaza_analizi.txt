@@ -1,4 +1,4 @@
-GÜN 20 - S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
+﻿S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
 
 Bugün S0085 mağazasının 59 günlük satış tahminlerini inceledim.
 

@@ -1,4 +1,4 @@
-GÜN 50 – MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
+﻿MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
 
 Bu çalışmada üç farklı makine öğrenmesi modelinin 59 günlük satış tahminlerini karşılaştırdım. İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını inceledim.
 

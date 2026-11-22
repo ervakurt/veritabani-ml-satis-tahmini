@@ -1,4 +1,4 @@
-# Gün 14 - Model Performans ve Hata Analizi
+﻿# Model Performans ve Hata Analizi
 
 **Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
 

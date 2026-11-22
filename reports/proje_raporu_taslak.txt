@@ -1,7 +1,7 @@
 ﻿========================================
-KAYNAK RAPOR: gun14_model_analizi.txt
+KAYNAK RAPOR: model_analizi.txt
 ========================================
-# Gün 14 - Model Performans ve Hata Analizi
+# Model Performans ve Hata Analizi
 
 **Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
 
@@ -50,9 +50,9 @@ Random Forest modelimin genel hata sonuçlarını yeniden hesapladım ve önceki
 Sonraki çalışmalarımda modelin bu hatalarını azaltmaya ve tahminlerin güvenilirliğini artırmaya odaklanacağım.
 
 ========================================
-KAYNAK RAPOR: gun15_model_iyilestirme.txt
+KAYNAK RAPOR: model_iyilestirme.txt
 ========================================
-# Gün 15 - Makine Öğrenmesi Modelinin İyileştirilmesi
+# Makine Öğrenmesi Modelinin İyileştirilmesi
 
 **Proje:** Veritabanı ve Makine Öğrenmesi ile Satış Tahmini
 
@@ -110,9 +110,9 @@ Yeni Random Forest modelim, eski modele göre daha düşük hata değerleri verd
 Yeni modeli `models/iyilestirilmis_random_forest.pkl` dosyasına kaydettim. Sonraki çalışmalarda farklı modeller deneyerek tahmin başarısını artırmayı hedefliyorum.
 
 ========================================
-KAYNAK RAPOR: gun16_model_karsilastirma.txt
+KAYNAK RAPOR: model_karsilastirma.txt
 ========================================
-GÜN 16 - MAKİNE ÖĞRENMESİ MODELLERİNİN KARŞILAŞTIRILMASI
+MAKİNE ÖĞRENMESİ MODELLERİNİN KARŞILAŞTIRILMASI
 
 Bugün HistGradientBoosting algoritmasını kullanarak yeni bir satış tahmin modeli oluşturdum.
 
@@ -142,9 +142,9 @@ Yeni modeli models/hist_gradient_modeli.pkl dosyasına kaydettim.
 Sonuç olarak HistGradientBoosting modelini gelecekteki satış tahminleri için güçlü bir aday olarak belirledim. Nihai model seçimini ek değerlendirmelerden sonra yapacağım.
 
 ========================================
-KAYNAK RAPOR: gun17_model_secimi.txt
+KAYNAK RAPOR: model_secimi.txt
 ========================================
-GÜN 17 - MODEL SEÇİMİ
+MODEL SEÇİMİ
 
 Bugün Random Forest ve HistGradientBoosting modellerinin sonuçlarını karşılaştırdım.
 
@@ -166,12 +166,12 @@ Bu nedenle HistGradientBoosting modelini öncelikli aday olarak belirledim.
 
 Nihai model seçimini ayrı bir doğrulama dönemi üzerinde kontrol ettikten sonra yapacağım.
 
-Karşılaştırma sonuçlarını gun17_model_karsilastirma.csv dosyasına kaydettim.
+Karşılaştırma sonuçlarını csv/ilk_model_karsilastirmasi.csv dosyasına kaydettim.
 
 ========================================
-KAYNAK RAPOR: gun18_tahmin_analizi.txt
+KAYNAK RAPOR: tahmin_analizi.txt
 ========================================
-GÜN 18 - SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
+SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
 
 Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini karşılaştırdım.
 
@@ -192,9 +192,9 @@ Ancak tahminlerin gerçek satışlarla karşılaştırılması henüz mümkün o
 Karşılaştırma sonuçlarını CSV dosyalarına kaydettim.
 
 ========================================
-KAYNAK RAPOR: gun19_grafik_analizi.txt
+KAYNAK RAPOR: grafik_analizi.txt
 ========================================
-GÜN 19 - SATIŞ TAHMİNLERİNİN GRAFİKLE KARŞILAŞTIRILMASI
+SATIŞ TAHMİNLERİNİN GRAFİKLE KARŞILAŞTIRILMASI
 
 Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini grafik üzerinde karşılaştırdım.
 
@@ -210,14 +210,14 @@ Random Forest modeli çoğu gün daha yüksek satış tahmin etti.
 
 Aralık ayında bazı günlerde satış tahminlerinin Kasım ayına göre daha yüksek olduğunu gözlemledim.
 
-Grafiği reports/gun19_model_karsilastirma.png dosyasına kaydettim.
+Grafiği grafikler/iki_model_grafik_karsilastirmasi.png dosyasına kaydettim.
 
 Bu grafik sayesinde iki modelin tahminlerini daha kolay karşılaştırabildim.
 
 ========================================
-KAYNAK RAPOR: gun20_magaza_analizi.txt
+KAYNAK RAPOR: magaza_analizi.txt
 ========================================
-GÜN 20 - S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
+S0085 MAĞAZASI SATIŞ TAHMİN ANALİZİ
 
 Bugün S0085 mağazasının 59 günlük satış tahminlerini inceledim.
 
@@ -237,10 +237,10 @@ Daha önce yaptığım tarihsel testlerde HistGradientBoosting modelinin S0085 m
 
 Ancak gelecekteki gerçek satışlar elimde olmadığı için hangi tahminin daha doğru olduğunu kesin olarak belirleyemiyorum.
 
-Grafiği reports/gun20_S0085_tahmin_grafigi.png dosyasına kaydettim.
+Grafiği grafikler/S0085_tahmin_grafigi.png dosyasına kaydettim.
 
 ========================================
-KAYNAK RAPOR: gun21_magaza_analizi.txt
+KAYNAK RAPOR: uc_magaza_tahmin_analizi.txt
 ========================================
  MAĞAZA BAZINDA SATIŞ TAHMİN ANALİZİ
 
@@ -274,10 +274,10 @@ Grafikleri ve karşılaştırma sonuçlarını reports klasörüne kaydettim.
 Bu çalışma sayesinde modellerin farklı mağazalarda nasıl tahminler yaptığını daha ayrıntılı inceleyebildim.
 
 ========================================
-KAYNAK RAPOR: gun22_model_dogrulama.txt
+KAYNAK RAPOR: model_dogrulama.txt
 ========================================
 
-GUN 22 - MODEL DOGRULAMA RAPORU
+MODEL DOGRULAMA RAPORU
 
 1. EGITIM VE TEST VERILERI
 
@@ -362,9 +362,9 @@ Nihai model secimi icin farkli baslangic tarihlerinde
 ek performans kontrolleri yapilabilir.
 
 ========================================
-KAYNAK RAPOR: gun50_grafik_analizi.txt
+KAYNAK RAPOR: uc_model_grafik_karsilastirmasi.txt
 ========================================
-GÜN 50 – MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
+MODEL TAHMİN KARŞILAŞTIRMA ANALİZİ
 
 Bu çalışmada üç farklı makine öğrenmesi modelinin 59 günlük satış tahminlerini karşılaştırdım. İlk Random Forest, İyileştirilmiş Random Forest ve HistGradientBoosting modellerinin sonuçlarını inceledim.
 
@@ -405,9 +405,9 @@ Modellerin benzer dönemlerde yükseliş ve düşüşler gösterdiğini, ancak t
 Bu karşılaştırma sayesinde modellerin tahmin davranışlarını daha iyi inceleme fırsatı buldum.
 
 ========================================
-KAYNAK RAPOR: gun58_magaza_model_karsilastirma_analizi.txt
+KAYNAK RAPOR: magaza_model_karsilastirma_analizi.txt
 ========================================
-GÜN 58 – MAĞAZA BAZLI MODEL KARŞILAŞTIRMA ANALİZİ
+MAĞAZA BAZLI MODEL KARŞILAŞTIRMA ANALİZİ
 
 **1. Çalışmanın Amacı**
 
@@ -482,4 +482,7 @@ Bu çalışmada PostgreSQL üzerinde SQL sorguları kullanarak üç modelin sat�
 Bu analiz sayesinde modellerin farklı mağazalardaki tahmin davranışlarını daha ayrıntılı değerlendirdim.
 
 Ayrıca makine öğrenmesi sonuçlarının PostgreSQL üzerinde saklanabildiğini ve SQL sorgularıyla analiz edilebildiğini gösterdim.
+
+
+
 

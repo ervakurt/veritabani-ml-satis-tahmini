@@ -1,4 +1,4 @@
- MAĞAZA BAZINDA SATIŞ TAHMİN ANALİZİ
+﻿ MAĞAZA BAZINDA SATIŞ TAHMİN ANALİZİ
 
  S0020, S0026 ve S0038 mağazalarının 59 günlük satış tahminlerini inceledim.
 

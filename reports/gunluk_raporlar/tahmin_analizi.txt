@@ -1,4 +1,4 @@
-GÜN 18 - SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
+﻿SATIŞ TAHMİNLERİNİN KARŞILAŞTIRILMASI
 
 Bugün Random Forest ve HistGradientBoosting modellerinin 59 günlük satış tahminlerini karşılaştırdım.
 
