@@ -18,4 +18,4 @@ Daha önce yaptığım tarihsel testlerde HistGradientBoosting modelinin S0085 m
 
 Ancak gelecekteki gerçek satışlar elimde olmadığı için hangi tahminin daha doğru olduğunu kesin olarak belirleyemiyorum.
 
-Grafiği reports/gun20_S0085_tahmin_grafigi.png dosyasına kaydettim.
+Grafiği reports/grafikler/S0085_tahmin_grafigi.png dosyasına kaydettim.

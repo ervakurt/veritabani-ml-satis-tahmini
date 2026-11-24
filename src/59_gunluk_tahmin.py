@@ -87,7 +87,7 @@ sonuclar = sonuclar.sort_values(
 )
 
 sonuclar.to_csv(
-    "reports/59_gunluk_satis_tahminleri.csv",
+    "reports/csv/59_gunluk_satis_tahminleri.csv",
     index=False,
     encoding="utf-8-sig"
 )

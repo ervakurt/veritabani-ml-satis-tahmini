@@ -199,7 +199,7 @@ plt.legend()
 plt.grid(True)
 
 plt.tight_layout()
-plt.savefig("reports/gercek_tahmin_grafigi.png", dpi=300)
+plt.savefig("reports/grafikler/gercek_tahmin_grafigi.png", dpi=300)
 plt.show()
 
 print("Grafik başarıyla kaydedildi!")
@@ -223,7 +223,7 @@ plt.xlabel("Özellik Önem Derecesi")
 plt.ylabel("Özellikler")
 
 plt.tight_layout()
-plt.savefig("reports/ozellik_onem_grafigi.png", dpi=300)
+plt.savefig("reports/grafikler/ozellik_onem_grafigi.png", dpi=300)
 plt.show()
 
 print("\nÖzellik önem grafiği kaydedildi!")

@@ -5,8 +5,8 @@ import psycopg2
 from getpass import getpass
 from psycopg2.extras import execute_values
 
-# HistGradientBoosting tahminlerini oku
-dosya_yolu = "reports/hist_gradient_59_gunluk_tahmin.csv"
+
+dosya_yolu = "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 
 veri = pd.read_csv(
     dosya_yolu,
@@ -16,7 +16,7 @@ veri = pd.read_csv(
 print("CSV dosyasi okundu.")
 print("Toplam kayit:", len(veri))
 
-# Gerekli sutunlari kontrol et
+
 gerekli_sutunlar = [
     "magaza_id",
     "tahmin_tarihi",
@@ -37,7 +37,7 @@ if veri.duplicated(
 ).any():
     raise ValueError("Tekrar eden magaza-tarih kayitlari var.")
 
-# PostgreSQL icin kayitlari hazirla
+
 kayitlar = [
     (
         str(satir.magaza_id),
@@ -50,7 +50,7 @@ kayitlar = [
     )
 ]
 
-# PostgreSQL baglantisi
+
 sifre = os.getenv("PGPASSWORD") or getpass(
     "PostgreSQL sifresi: "
 )
@@ -87,7 +87,7 @@ try:
                 kayitlar
             )
 
-            # Kaydedilen sonuclari kontrol et
+            
             cursor.execute(
                 """
                 SELECT

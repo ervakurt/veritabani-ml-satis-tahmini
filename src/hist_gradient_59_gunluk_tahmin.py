@@ -68,7 +68,7 @@ sonuc = veri[
 ].copy()
 
 # Yeni CSV dosyasina kaydet
-dosya = "reports/hist_gradient_59_gunluk_tahmin.csv"
+dosya = "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 
 sonuc.to_csv(
     dosya,

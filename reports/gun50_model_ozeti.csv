@@ -1,4 +1,0 @@
-﻿model,tahmin_sayisi,magaza_sayisi,toplam_tahmini_satis,ortalama_gunluk_magaza_satisi
-Ilk Random Forest,8201,139,465375.62323314924,56.74620451568702
-Iyilestirilmis Random Forest,8201,139,461598.5361018267,56.28564030018616
-HistGradientBoosting,8201,139,443460.9417530288,54.074008261556976

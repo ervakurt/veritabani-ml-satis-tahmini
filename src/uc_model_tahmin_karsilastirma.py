@@ -5,11 +5,11 @@ import pandas as pd
 # Modellerin tahmin dosyalari
 dosyalar = {
     "Ilk Random Forest":
-        "reports/59_gunluk_satis_tahminleri.csv",
+        "reports/csv/59_gunluk_satis_tahminleri.csv",
     "Iyilestirilmis Random Forest":
-        "reports/iyilestirilmis_rf_59_gunluk_tahmin.csv",
+       "reports/csv/iyilestirilmis_rf_59_gunluk_tahmin.csv",
     "HistGradientBoosting":
-        "reports/hist_gradient_59_gunluk_tahmin.csv"
+        "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 }
 
 veriler = []
@@ -90,18 +90,18 @@ ozet = pd.DataFrame(ozetler)
 os.makedirs("reports", exist_ok=True)
 
 ozet.to_csv(
-    "reports/gun50_model_ozeti.csv",
+    "reports/csv/uc_model_ozeti.csv",
     index=False,
     encoding="utf-8-sig"
 )
 
 karsilastirma.to_csv(
-    "reports/gun50_tahmin_karsilastirma.csv",
+    "reports/csv/uc_model_tahmin_karsilastirmasi.csv",
     index=False,
     encoding="utf-8-sig"
 )
 
-print("\n--- GUN 50 MODEL KARSILASTIRMASI ---")
+print("--- UC MODELIN TAHMIN KARSILASTIRMASI ---")
 print(ozet.round(2).to_string(index=False))
 
 print("\nKarsilastirilan magaza-tarih sayisi:",
@@ -109,7 +109,12 @@ print("\nKarsilastirilan magaza-tarih sayisi:",
 
 print("\nIlk 5 karsilastirma:")
 print(
-    karsilastirma.head(5).round(2).to_string(index=False)
+    karsilastirma.head(5).round({
+    sutun: 2
+    for sutun in karsilastirma.select_dtypes(
+        include="number"
+    ).columns
+}).to_string(index=False)
 )
 
 print("\nSonuclar reports klasorune kaydedildi.")

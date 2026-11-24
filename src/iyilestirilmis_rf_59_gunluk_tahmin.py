@@ -79,7 +79,7 @@ sonuclar = sonuclar.sort_values(
 os.makedirs("reports", exist_ok=True)
 
 sonuclar.to_csv(
-    "reports/iyilestirilmis_rf_59_gunluk_tahmin.csv",
+   "reports/csv/iyilestirilmis_rf_59_gunluk_tahmin.csv",
     index=False,
     encoding="utf-8-sig"
 )

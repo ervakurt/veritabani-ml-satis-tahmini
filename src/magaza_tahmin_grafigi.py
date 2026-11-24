@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 
 # Iki modelin tahminlerini oku
 rf = pd.read_csv(
-    "reports/59_gunluk_satis_tahminleri.csv"
+   "reports/csv/59_gunluk_satis_tahminleri.csv"
 )
 
 hgb = pd.read_csv(
-    "reports/hist_gradient_59_gunluk_tahmin.csv"
+    "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 )
 
 # S0085 magazasini sec
@@ -71,7 +71,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Grafigi kaydet
-dosya = "reports/gun20_S0085_tahmin_grafigi.png"
+dosya = "reports/grafikler/S0085_tahmin_grafigi.png"
 
 plt.savefig(
     dosya,

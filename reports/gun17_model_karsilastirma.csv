@@ -1,3 +1,0 @@
-Model,MAE,RMSE,R2,Ortalama Sapma
-Random Forest,14.77,31.18,0.72,1.35
-HistGradientBoosting,14.81,30.75,0.728,0.76

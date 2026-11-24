@@ -5,8 +5,8 @@ import psycopg2
 from getpass import getpass
 from psycopg2.extras import execute_values
 
-# CSV dosyasini oku
-dosya_yolu = "reports/iyilestirilmis_rf_59_gunluk_tahmin.csv"
+
+dosya_yolu = "reports/csv/iyilestirilmis_rf_59_gunluk_tahmin.csv"
 
 veri = pd.read_csv(
     dosya_yolu,
@@ -16,7 +16,7 @@ veri = pd.read_csv(
 print("CSV dosyasi okundu.")
 print("Toplam kayit:", len(veri))
 
-# Verileri PostgreSQL icin hazirla
+
 kayitlar = [
     (
         str(satir.magaza_id),
@@ -27,7 +27,7 @@ kayitlar = [
     for satir in veri.itertuples(index=False)
 ]
 
-# PostgreSQL baglantisi
+
 sifre = os.getenv("PGPASSWORD") or getpass(
     "PostgreSQL sifresi: "
 )
@@ -58,7 +58,7 @@ try:
                 kayitlar
             )
 
-            # Kaydedilen verileri kontrol et
+           
             cursor.execute(
                 """
                 SELECT

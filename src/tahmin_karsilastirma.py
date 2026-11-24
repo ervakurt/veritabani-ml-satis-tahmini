@@ -3,11 +3,11 @@ import pandas as pd
 
 # Iki modelin tahminlerini oku
 rf = pd.read_csv(
-    "reports/59_gunluk_satis_tahminleri.csv"
+    "reports/csv/59_gunluk_satis_tahminleri.csv"
 )
 
 hgb = pd.read_csv(
-    "reports/hist_gradient_59_gunluk_tahmin.csv"
+    "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 )
 
 # Magaza ve tarihe gore birlestir
@@ -64,13 +64,13 @@ print(en_buyuk_farklar.to_string(index=False))
 
 # Raporlari kaydet
 karsilastirma.to_csv(
-    "reports/gun18_tahmin_karsilastirma.csv",
+    "reports/csv/iki_model_tahmin_karsilastirmasi.csv",
     index=False,
     encoding="utf-8-sig"
 )
 
 magaza_ozet.to_csv(
-    "reports/gun18_magaza_karsilastirma.csv",
+    "reports/csv/magaza_karsilastirmasi.csv",
     index=False,
     encoding="utf-8-sig"
 )

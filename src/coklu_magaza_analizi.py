@@ -5,11 +5,11 @@ from pathlib import Path
 
 # Tahmin dosyalarini oku
 rf = pd.read_csv(
-    "reports/59_gunluk_satis_tahminleri.csv"
+   "reports/csv/59_gunluk_satis_tahminleri.csv"
 )
 
 hgb = pd.read_csv(
-    "reports/hist_gradient_59_gunluk_tahmin.csv"
+    "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 )
 
 # Tarihleri duzenle
@@ -96,7 +96,7 @@ for magaza in magazalar:
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    dosya = f"reports/gun21_{magaza}_grafik.png"
+    dosya = f"reports/grafikler/{magaza}_tahmin_grafigi.png"
 
     plt.savefig(
         dosya,
@@ -116,9 +116,10 @@ print(sonuc_tablosu.to_string(index=False))
 
 # CSV raporunu kaydet
 sonuc_tablosu.to_csv(
-    "reports/gun21_magaza_analizi.csv",
+    "reports/csv/magaza_analizi.csv",
     index=False,
     encoding="utf-8-sig"
 )
+
 
 print("\nTum grafikler ve rapor kaydedildi.")

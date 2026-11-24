@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Gun 50 karsilastirma verilerini oku
 veri = pd.read_csv(
-    "reports/gun50_tahmin_karsilastirma.csv",
+    "reports/csv/uc_model_tahmin_karsilastirmasi.csv",
     parse_dates=["tahmin_tarihi"]
 )
 
@@ -42,7 +42,7 @@ plt.plot(
     linewidth=2
 )
 
-plt.title("Gun 50 - Modellerin 59 Gunluk Satis Tahminleri")
+plt.title("Uc Modelin 59 Gunluk Satis Tahminleri")
 plt.xlabel("Tahmin Tarihi")
 plt.ylabel("Gunluk Toplam Tahmini Satis")
 plt.legend()
@@ -54,7 +54,7 @@ plt.tight_layout()
 os.makedirs("reports", exist_ok=True)
 
 plt.savefig(
-    "reports/gun50_model_tahmin_grafigi.png",
+    "reports/grafikler/uc_model_tahmin_grafigi.png",
     dpi=300,
     bbox_inches="tight"
 )
@@ -62,5 +62,5 @@ plt.savefig(
 plt.show()
 
 print("Grafik basariyla olusturuldu.")
-print("Dosya: reports/gun50_model_tahmin_grafigi.png")
+print("Dosya: reports/grafikler/uc_model_tahmin_grafigi.png")
 print("Karsilastirilan gun sayisi:", len(gunluk))

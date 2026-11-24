@@ -20,4 +20,4 @@ Bu nedenle HistGradientBoosting modelini öncelikli aday olarak belirledim.
 
 Nihai model seçimini ayrı bir doğrulama dönemi üzerinde kontrol ettikten sonra yapacağım.
 
-Karşılaştırma sonuçlarını gun17_model_karsilastirma.csv dosyasına kaydettim.
+Karşılaştırma sonuçlarını reports/csv/ilk_model_karsilastirmasi.csv dosyasına kaydettim.

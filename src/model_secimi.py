@@ -128,7 +128,7 @@ print("\n--- MODEL KARSILASTIRMASI ---")
 print(sonuc_tablosu.to_string(index=False))
 
 sonuc_tablosu.to_csv(
-    "reports/gun22_model_karsilastirma.csv",
+    "reports/csv/dogrulama_model_karsilastirmasi.csv",
     index=False
 )
 
@@ -142,7 +142,7 @@ print("\n--- BENZERSIZ HEDEF MODEL KARSILASTIRMASI ---")
 print(benzersiz_tablo.to_string(index=False))
 
 benzersiz_tablo.to_csv(
-    "reports/gun22_benzersiz_hedef_karsilastirma.csv",
+    "reports/csv/benzersiz_hedef_karsilastirmasi.csv",
     index=False
 )
 
@@ -195,7 +195,7 @@ son_tablo = pd.DataFrame(tek_tarih_sonuclar)
 print(son_tablo.to_string(index=False))
 
 son_tablo.to_csv(
-    "reports/gun22_tek_baslangic_karsilastirma.csv",
+    "reports/csv/tek_baslangic_karsilastirmasi.csv",
     index=False
 )
 

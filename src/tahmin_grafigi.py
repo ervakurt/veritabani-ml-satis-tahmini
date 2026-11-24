@@ -2,7 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-veri = pd.read_csv("reports/59_gunluk_satis_tahminleri.csv")
+veri = pd.read_csv("reports/csv/59_gunluk_satis_tahminleri.csv")
 
 veri["tahmin_tarihi"] = pd.to_datetime(veri["tahmin_tarihi"])
 
@@ -18,7 +18,7 @@ plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
-plt.savefig("reports/59_gunluk_satis_grafigi.png", dpi=150)
+plt.savefig("reports/grafikler/59_gunluk_satis_grafigi.png", dpi=150)
 
 plt.show()
 

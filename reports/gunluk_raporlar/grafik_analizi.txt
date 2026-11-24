@@ -14,6 +14,6 @@ Random Forest modeli çoğu gün daha yüksek satış tahmin etti.
 
 Aralık ayında bazı günlerde satış tahminlerinin Kasım ayına göre daha yüksek olduğunu gözlemledim.
 
-Grafiği reports/gun19_model_karsilastirma.png dosyasına kaydettim.
+Grafiği reports/grafikler/iki_model_grafik_karsilastirmasi.png dosyasına kaydettim.
 
 Bu grafik sayesinde iki modelin tahminlerini daha kolay karşılaştırabildim.
