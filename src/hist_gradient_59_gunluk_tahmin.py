@@ -3,16 +3,17 @@ import pandas as pd
 import numpy as np
 import joblib
 import psycopg2
+import os
 from getpass import getpass
 
-# Kaydedilen modeli yukle
+
 print("HistGradientBoosting modeli yukleniyor...")
 
 kayit = joblib.load("models/hist_gradient_modeli.pkl")
 model = kayit["model"]
 ozellikler = kayit["ozellikler"]
 
-# PostgreSQL baglantisi
+
 sifre = getpass("PostgreSQL sifresi: ")
 
 baglanti = psycopg2.connect(
@@ -40,7 +41,7 @@ baglanti.close()
 print(f"Toplam tahmin satiri: {len(veri)}")
 print(f"Magaza sayisi: {veri['magaza_id'].nunique()}")
 
-# Modelin kullanacagi ozellikler
+
 x = veri.drop(columns=["tahmin_tarihi"])
 
 x = pd.get_dummies(
@@ -48,26 +49,28 @@ x = pd.get_dummies(
     columns=["magaza_id"]
 )
 
-# Egitimdeki sutun sirasi ile ayni hale getir
+
 x = x.reindex(
     columns=ozellikler,
     fill_value=0
 )
 
-# Tahmin yap
+
 print("59 gunluk satis tahminleri hesaplaniyor...")
 
 veri["tahmini_satis"] = np.maximum(
     model.predict(x), 0
 )
 
-# Sonuclari hazirla
+
 sonuc = veri[
     ["magaza_id", "tahmin_tarihi",
      "tahmin_gunu", "tahmini_satis"]
 ].copy()
 
-# Yeni CSV dosyasina kaydet
+
+os.makedirs("reports/csv", exist_ok=True)
+
 dosya = "reports/csv/hist_gradient_59_gunluk_tahmin.csv"
 
 sonuc.to_csv(
@@ -76,7 +79,7 @@ sonuc.to_csv(
     encoding="utf-8-sig"
 )
 
-# Genel sonuclari yazdir
+
 print("\n--- HISTGRADIENTBOOSTING TAHMINLERI ---")
 print(f"Toplam tahmin: {len(sonuc)}")
 print(f"Magaza sayisi: {sonuc['magaza_id'].nunique()}")

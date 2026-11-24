@@ -76,7 +76,7 @@ print(
 print("\nToplam tahmin sayısı:", len(gelecek))
 
 # Tahmin sonuçlarını CSV dosyasına kaydet
-os.makedirs("reports", exist_ok=True)
+os.makedirs("reports/csv", exist_ok=True)
 
 sonuclar = gelecek[
     ["magaza_id", "tahmin_tarihi", "tahmin_gunu", "tahmini_satis"]

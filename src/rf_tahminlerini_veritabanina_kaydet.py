@@ -15,6 +15,25 @@ veri = pd.read_csv(
 
 print("CSV dosyasi okundu.")
 print("Toplam kayit:", len(veri))
+gerekli_sutunlar = [
+    "magaza_id",
+    "tahmin_tarihi",
+    "tahmin_gunu",
+    "tahmini_satis"
+]
+
+eksik = set(gerekli_sutunlar) - set(veri.columns)
+
+if eksik:
+    raise ValueError(f"Eksik sutunlar: {eksik}")
+
+if veri[gerekli_sutunlar].isnull().any().any():
+    raise ValueError("Tahmin verilerinde bos deger var.")
+
+if veri.duplicated(
+    ["magaza_id", "tahmin_tarihi"]
+).any():
+    raise ValueError("Tekrar eden magaza-tarih kayitlari var.")
 
 
 kayitlar = [

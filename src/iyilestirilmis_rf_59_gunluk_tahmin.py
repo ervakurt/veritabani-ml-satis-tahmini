@@ -76,7 +76,7 @@ sonuclar = sonuclar.sort_values(
 )
 
 # Yeni CSV dosyasina kaydet
-os.makedirs("reports", exist_ok=True)
+os.makedirs("reports/csv", exist_ok=True)
 
 sonuclar.to_csv(
    "reports/csv/iyilestirilmis_rf_59_gunluk_tahmin.csv",

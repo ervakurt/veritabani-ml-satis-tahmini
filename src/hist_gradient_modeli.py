@@ -1,4 +1,4 @@
-
+import os
 import pandas as pd
 import numpy as np
 import joblib
@@ -113,6 +113,8 @@ for magaza in ["S0020", "S0026", "S0085"]:
     print(f"{magaza} MAE: {magaza_mae:.2f}")
 
 # Modeli kaydet
+os.makedirs("models", exist_ok=True)
+
 joblib.dump(
     {
         "model": model,
@@ -120,5 +122,4 @@ joblib.dump(
     },
     "models/hist_gradient_modeli.pkl"
 )
-
 print("\nHistGradientBoosting modeli kaydedildi.")
