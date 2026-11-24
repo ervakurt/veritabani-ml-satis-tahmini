@@ -1,113 +1,426 @@
 # PostgreSQL ve Makine Öğrenmesi ile Mağaza Satış Tahmini
 
-## 1. Projenin Amacı
+**Python | PostgreSQL 18 | Scikit-learn | Veri Analizi | Machine Learning**
 
-Bu projede PostgreSQL veritabanı ve makine öğrenmesi yöntemlerini kullanarak mağazaların gelecekteki satışlarını tahmin etmeyi amaçladım.
+## 1. Proje Hakkında
 
-Satış verilerini PostgreSQL veritabanında sakladım. Python ile verileri işledim, makine öğrenmesi modelleri geliştirdim ve elde ettiğim tahminleri tekrar PostgreSQL'e kaydettim.
+Bu projede geçmiş satış verilerini kullanarak mağazaların gelecekteki satış miktarlarını tahmin eden bir sistem geliştirdim.
+
+PostgreSQL veritabanı ile Python tabanlı makine öğrenmesi modellerini entegre ederek veri aktarımı, veri ön işleme, model eğitimi, performans değerlendirmesi, satış tahmini ve sonuçların görselleştirilmesi aşamalarını gerçekleştirdim.
+
+### Projenin öne çıkan özellikleri
+
+- Yaklaşık 19,4 milyon satış kaydı
+- 144 mağaza ve 699 üründen oluşan veri seti
+- Üç farklı makine öğrenmesi modeli
+- 139 mağaza için 59 günlük satış tahmini
+- Her model için 8.201 tahmin
+- PostgreSQL ve Python entegrasyonu
+- Mağaza bazlı performans analizleri
+- Farklı model doğrulama yöntemleri
 
 ## 2. Kullanılan Teknolojiler
 
-- Python
-- PostgreSQL 18
-- pandas ve NumPy
-- scikit-learn
-- Matplotlib
-- psycopg2
-- joblib
-- Visual Studio Code
-- pgAdmin 4
+| Teknoloji | Kullanım amacı |
+|---|---|
+| Python | Veri işleme ve model geliştirme |
+| PostgreSQL 18 | Veri saklama ve SQL analizleri |
+| pandas | Veri hazırlama ve analiz |
+| NumPy | Sayısal hesaplamalar |
+| scikit-learn | Makine öğrenmesi |
+| Matplotlib | Veri görselleştirme |
+| psycopg2 | PostgreSQL bağlantısı |
+| joblib | Model kaydetme ve yükleme |
+| pgAdmin 4 | Veritabanı yönetimi |
+| Visual Studio Code | Kod geliştirme |
+| Git ve GitHub | Sürüm kontrolü |
 
 ## 3. Veri Seti
 
-Projede ürün, mağaza ve satış verileri kullandım.
+Projede 2017–2019 yılları arasındaki satış, mağaza ve ürün verileri kullanılmıştır.
 
-Veriler PostgreSQL veritabanına aktarıldı. Daha sonra mağazaların geçmiş satış bilgileri kullanılarak makine öğrenmesi için eğitim ve test verileri hazırlandı.
-
-## 4. Makine Öğrenmesi Modelleri
-
-Projede üç farklı model üzerinde çalıştım:
-
-1. İlk Random Forest
-2. İyileştirilmiş Random Forest
-3. HistGradientBoosting
-
-Modelleri MAE, RMSE ve R² metrikleriyle değerlendirdim.
-
-İyileştirilmiş Random Forest modelinde MAE 14,77, RMSE 31,18 ve R² 0,720 elde ettim.
-
-HistGradientBoosting modelinde MAE 14,81, RMSE 30,75 ve R² 0,728 elde ettim.
-
-Bu sonuçlar kullanılan test verisi üzerinde hesaplandı.
-
-## 5. Gelecek Satış Tahminleri
-
-Modellerle 139 mağaza için 59 günlük satış tahminleri oluşturdum.
-
-Tahmin dönemi 1 Kasım 2019 ile 29 Aralık 2019 arasındadır.
-
-| Model | Toplam Tahmini Satış |
+| Veri grubu | Kayıt sayısı |
 |---|---:|
-| İlk Random Forest | 465.375,62 |
-| İyileştirilmiş Random Forest | 461.598,54 |
-| HistGradientBoosting | 443.460,94 |
+| Satış verileri | Yaklaşık 19,4 milyon |
+| Mağaza verileri | 144 |
+| Ürün verileri | 699 |
+| Eğitim verileri | 622.454 |
+| Test verileri | 286.304 |
+| Tahmin yapılan mağazalar | 139 |
 
-Her model 8.201 satış tahmini oluşturdu.
+Mağaza verilerinde mağaza kimliği, mağaza türü, mağaza büyüklüğü ve şehir bilgileri bulunmaktadır.
 
-## 6. PostgreSQL Entegrasyonu
+Ürün verilerinde ürün kimliği, fiziksel boyutlar ve kategori hiyerarşisi bilgileri bulunmaktadır.
 
-Makine öğrenmesi için kullanılan veriler PostgreSQL üzerinden okundu.
+## 4. Sistem Mimarisi
 
-Modellerin oluşturduğu satış tahminleri CSV dosyalarına ve PostgreSQL tablolarına kaydedildi.
+Proje, veritabanı ve makine öğrenmesi arasında iki yönlü veri akışı sağlayacak şekilde geliştirilmiştir.
 
-Model sonuçları SQL sorgularıyla karşılaştırıldı.
+```mermaid
+flowchart TD
+    A[Ham CSV Verileri] --> B[Python ile Veri Aktarimi]
+    B --> C[(PostgreSQL)]
+    C --> D[Veri On Isleme]
+    D --> E[Egitim ve Test Verileri]
+    E --> F[Makine Ogrenmesi Modelleri]
+    F --> G[Model Performans Analizi]
+    F --> H[Kaydedilen Modeller]
+    H --> I[59 Gunluk Satis Tahmini]
+    C --> I
+    I --> J[CSV Tahmin Dosyalari]
+    J --> K[Grafikler ve Raporlar]
+    J --> L[PostgreSQL Tahmin Tablolari]
+    L --> M[SQL ile Sonuc Analizi]
+```
 
-Veritabanının yapısı `sql/schema.sql` dosyasında bulunmaktadır.
+## 5. PostgreSQL Entegrasyonu
 
-## 7. Proje Klasörleri
+Projede `retail_ml_db` isimli PostgreSQL veritabanı kullanılmıştır.
 
-- `data/`: Veri dosyaları
-- `models/`: Eğitilmiş modeller
-- `notebooks/`: Jupyter Notebook çalışmaları
-- `reports/`: Grafikler ve analiz sonuçları
-- `sql/`: Veritabanı şeması
-- `src/`: Python kaynak kodları
-- `requirements.txt`: Python bağımlılıkları
+Ham veriler Python üzerinden PostgreSQL'e aktarılmıştır. Eğitim ve test verileri SQL sorgularıyla alınmış, makine öğrenmesi modellerinin oluşturduğu tahminler tekrar veritabanına kaydedilmiştir.
 
-## 8. Kurulum
+### Makine öğrenmesi veri yapıları
 
-Python ve PostgreSQL kurulu olmalıdır.
+| Veri yapısı | Açıklama |
+|---|---|
+| `yeni_ml_egitim_temiz` | Model eğitim verileri |
+| `yeni_ml_test` | Model test verileri |
+| `gelecek_tahmin_verisi` | Gelecek satış tahmini verileri |
 
-Proje klasöründe sanal ortam oluşturulur:
+### Tahmin tabloları
+
+| Tablo | Açıklama |
+|---|---|
+| `satis_tahminleri` | İlk Random Forest tahminleri |
+| `satis_tahminleri_rf_iyilestirilmis` | İyileştirilmiş Random Forest tahminleri |
+| `satis_tahminleri_hist_gradient` | HistGradientBoosting tahminleri |
+
+Veritabanı şeması: [schema.sql](sql/schema.sql)
+
+## 6. Veri Ön İşleme
+
+Model eğitimi öncesinde satış verileri hazırlanmış ve eğitim-test ayrımı tarihsel olarak gerçekleştirilmiştir.
+
+### Eğitim ve test dönemleri
+
+| Veri grubu | Başlangıç | Bitiş |
+|---|---|---|
+| Eğitim | 01.05.2017 | 31.12.2018 |
+| Test | 07.01.2019 | 30.10.2019 |
+| Gelecek tahmini | 01.11.2019 | 29.12.2019 |
+
+### Modelde kullanılan özellikler
+
+- Mağaza kimliği
+- Tahmin günü
+- Haftanın günü
+- Ay
+- Geçmiş 7 günlük satış ortalaması
+- Geçmiş 28 günlük satış ortalaması
+- Geçmiş 59 günlük satış ortalaması
+
+Mağaza kimlikleri One-Hot Encoding yöntemiyle sayısal sütunlara dönüştürülmüştür.
+
+Geçmiş satış ortalamalarının doğruluğu 4.860 grup üzerinde kontrol edilmiştir.
+
+## 7. Makine Öğrenmesi Modelleri
+
+Projede üç farklı model geliştirilmiştir.
+
+### İlk Random Forest
+
+```python
+RandomForestRegressor(
+    n_estimators=50,
+    max_depth=15,
+    random_state=42,
+    n_jobs=-1
+)
+```
+
+### İyileştirilmiş Random Forest
+
+```python
+RandomForestRegressor(
+    n_estimators=100,
+    max_depth=20,
+    min_samples_leaf=5,
+    max_features=0.8,
+    random_state=42,
+    n_jobs=-1
+)
+```
+
+### HistGradientBoosting
+
+```python
+HistGradientBoostingRegressor(
+    max_iter=200,
+    max_depth=10,
+    learning_rate=0.05,
+    min_samples_leaf=20,
+    random_state=42
+)
+```
+
+## 8. Model Performans Karşılaştırması
+
+Modeller MAE, RMSE ve R² metrikleri kullanılarak değerlendirilmiştir.
+
+- MAE: Ortalama mutlak tahmin hatası
+- RMSE: Büyük tahmin hatalarına daha duyarlı hata metriği
+- R²: Modelin hedef değişkendeki değişkenliği açıklama düzeyini gösteren metrik
+
+### Genel test sonuçları
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| İlk Random Forest | 15,12 | 32,54 | 0,695 |
+| İyileştirilmiş Random Forest | **14,77** | 31,18 | 0,720 |
+| HistGradientBoosting | 14,81 | **30,75** | **0,728** |
+
+Random Forest modelinin parametreleri değiştirilerek tahmin hataları azaltılmıştır.
+
+HistGradientBoosting modeli genel değerlendirmede daha düşük RMSE ve daha yüksek R² değeri elde etmiştir.
+
+### Benzersiz tahmin hedefleri üzerinden değerlendirme
+
+286.304 test kaydında 41.369 benzersiz mağaza ve tahmin tarihi birleşimi bulunmaktadır.
+
+Tekrarlanan hedeflerin değerlendirme üzerindeki etkisini incelemek için ek bir karşılaştırma yapılmıştır.
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| İyileştirilmiş Random Forest | **14,03** | **29,12** | **0,752** |
+| HistGradientBoosting | 14,32 | 29,36 | 0,748 |
+
+### Tek başlangıç tarihi üzerinden değerlendirme
+
+2 Eylül 2019 başlangıç tarihi için 8.357 test kaydı değerlendirilmiştir.
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| İyileştirilmiş Random Forest | **14,61** | **25,18** | **0,786** |
+| HistGradientBoosting | 15,22 | 25,92 | 0,773 |
+
+Ek değerlendirmelerde iyileştirilmiş Random Forest daha başarılı sonuçlar vermiştir. Bu nedenle güçlü bir model adayı olarak belirlenmiştir.
+
+## 9. Gelecek Satış Tahminleri
+
+139 mağaza için 1 Kasım 2019 ile 29 Aralık 2019 arasındaki 59 günlük satış miktarları tahmin edilmiştir.
+
+Her model toplam 8.201 satış tahmini oluşturmuştur.
+
+| Model | Toplam tahmin sayısı | Toplam tahmini satış |
+|---|---:|---:|
+| İlk Random Forest | 8.201 | 465.375,62 |
+| İyileştirilmiş Random Forest | 8.201 | 461.598,54 |
+| HistGradientBoosting | 8.201 | 443.460,94 |
+
+### Üç modelin günlük satış tahminleri
+
+![Üç modelin satış tahminleri](reports/grafikler/uc_model_tahmin_grafigi.png)
+
+### Tahmin dosyaları
+
+- [İlk Random Forest tahminleri](reports/csv/59_gunluk_satis_tahminleri.csv)
+- [İyileştirilmiş Random Forest tahminleri](reports/csv/iyilestirilmis_rf_59_gunluk_tahmin.csv)
+- [HistGradientBoosting tahminleri](reports/csv/hist_gradient_59_gunluk_tahmin.csv)
+
+## 10. Mağaza Bazlı Analizler
+
+Modellerin tahminleri mağaza bazında karşılaştırılmıştır.
+
+İyileştirilmiş Random Forest ve HistGradientBoosting modelleri arasında en yüksek mutlak tahmin farkının görüldüğü mağazalar:
+
+| Mağaza | Mutlak tahmin farkı |
+|---|---:|
+| S0085 | 5.553,19 |
+| S0097 | 1.856,39 |
+| S0038 | 1.561,38 |
+| S0020 | 1.339,84 |
+| S0028 | 853,28 |
+
+En yüksek yüzdesel fark S0006 mağazasında %37,60 olarak hesaplanmıştır.
+
+### S0085 mağazası
+
+![S0085 mağaza tahminleri](reports/grafikler/S0085_tahmin_grafigi.png)
+
+### S0020 mağazası
+
+![S0020 mağaza tahminleri](reports/grafikler/S0020_tahmin_grafigi.png)
+
+Bu grafikler ilk Random Forest ve HistGradientBoosting modellerinin mağaza bazlı tahminlerini göstermektedir.
+
+## 11. Proje Klasör Yapısı
+
+```text
+veritabani_ml_projesi/
+├── data/
+├── models/
+├── notebooks/
+├── reports/
+│   ├── csv/
+│   ├── grafikler/
+│   ├── gunluk_raporlar/
+│   ├── proje_raporu.txt
+│   └── proje_raporu_taslak.txt
+├── sql/
+│   └── schema.sql
+├── src/
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+| Klasör | İçerik |
+|---|---|
+| data | Ham veri dosyaları |
+| models | Eğitilmiş makine öğrenmesi modelleri |
+| notebooks | Jupyter Notebook çalışma alanı |
+| reports/csv | Tahmin ve analiz sonuçları |
+| reports/grafikler | Veri görselleştirmeleri |
+| reports/gunluk_raporlar | Geliştirme ve analiz raporları |
+| sql | Veritabanı şeması |
+| src | Python kaynak kodları |
+
+## 12. Kurulum ve Çalıştırma
+
+### Projeyi klonlama
+
+```bash
+git clone https://github.com/ervakurt/veritabani-ml-satis-tahmini.git
+cd veritabani-ml-satis-tahmini
+```
+
+### Sanal ortam oluşturma
 
 ```bash
 python -m venv venv
 ```
 
-Windows üzerinde sanal ortam etkinleştirilir:
+Windows PowerShell üzerinde etkinleştirme:
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-Gerekli Python kütüphaneleri yüklenir:
+### Gerekli kütüphaneleri yükleme
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-PostgreSQL üzerinde `retail_ml_db` isimli veritabanı oluşturulur.
+### PostgreSQL veritabanını hazırlama
 
-`sql/schema.sql` dosyası kullanılarak veritabanı yapısı hazırlanabilir.
+PostgreSQL üzerinde aşağıdaki isimle bir veritabanı oluşturulmalıdır:
 
-**Not:** Şema dosyası satış verilerini içermez. Modelleri yeniden eğitmek veya tahminleri üretmek için gerekli verilerin ayrıca yüklenmesi gerekir.
+```sql
+CREATE DATABASE retail_ml_db;
+```
 
-## 9. Proje Sonuçları
+Oluşturulan veritabanında `sql/schema.sql` dosyası çalıştırılmalıdır.
 
-Bu projede PostgreSQL ile makine öğrenmesi modellerini birlikte kullandım.
+Ham veri dosyaları temin edilerek `data/` klasörüne yerleştirilmelidir.
 
-Üç farklı model geliştirdim ve sonuçlarını karşılaştırdım. Modellerin mağaza bazlı ve günlük satış tahminlerini analiz ettim.
+### Veri aktarımı
 
-Elde ettiğim sonuçları grafiklerle gösterdim ve PostgreSQL üzerinde sakladım.
+```bash
+python src/load_products.py
+python src/load_stores.py
+python src/load_sales.py
+```
 
-Böylece veritabanı ve makine öğrenmesi entegrasyonunu uygulamalı olarak gerçekleştirdim.
+Model eğitiminden önce gerekli eğitim, test ve gelecek tahmin veri yapıları hazırlanmalıdır.
+
+### Modelleri eğitme
+
+```bash
+python src/gelecek_tahmin_modeli.py
+python src/model_iyilestirme.py
+python src/hist_gradient_modeli.py
+```
+
+### Satış tahminlerini oluşturma
+
+```bash
+python src/59_gunluk_tahmin.py
+python src/iyilestirilmis_rf_59_gunluk_tahmin.py
+python src/hist_gradient_59_gunluk_tahmin.py
+```
+
+### Model performanslarını karşılaştırma
+
+```bash
+python src/model_secimi.py
+```
+
+### Tahminleri PostgreSQL'e kaydetme
+
+```bash
+python src/rf_tahminlerini_veritabanina_kaydet.py
+python src/hist_gradient_veritabanina_kaydet.py
+```
+
+### Karşılaştırma ve grafik oluşturma
+
+```bash
+python src/uc_model_tahmin_karsilastirma.py
+python src/uc_model_tahmin_grafigi.py
+```
+
+**Kurulum notları:**
+
+- PostgreSQL sunucusunun çalışıyor olması gerekmektedir.
+- Veritabanı şifresi kaynak kodlarda saklanmamaktadır.
+- Ham CSV verileri ve eğitilmiş PKL model dosyaları GitHub deposuna dahil edilmemiştir.
+- Tahminlerin yeniden oluşturulabilmesi için gerekli veriler, veritabanı yapıları ve eğitilmiş modeller hazırlanmalıdır.
+- Kurulumun sıfırdan tamamlanması ayrıca doğrulanmalıdır.
+
+## 13. Test ve Doğrulama
+
+Proje kapsamında aşağıdaki kontroller gerçekleştirilmiştir:
+
+- Python dosyalarının sözdizimi kontrolü
+- Üç modelin satış tahmini oluşturma testi
+- CSV dosyalarının oluşturulması
+- Model performanslarının karşılaştırılması
+- Grafik oluşturma testleri
+- PostgreSQL kayıt işlemleri
+- Eksik sütun ve boş değer kontrolleri
+- Tekrar eden kayıt kontrolleri
+- Veritabanına yeniden kayıt sırasında mükerrer kayıt oluşmadığının kontrolü
+
+İyileştirilmiş Random Forest ve HistGradientBoosting tahminlerinin PostgreSQL'e tekrar kaydedilmesi sonucunda her iki tabloda da 8.201 kayıt bulunduğu doğrulanmıştır.
+
+Son kod düzenlemelerinden sonra mevcut eğitilmiş modeller kullanılmıştır. Modellerin sıfırdan yeniden eğitilmesi gerçekleştirilmemiştir.
+
+## 14. Projenin Sınırlılıkları ve Gelecek Çalışmalar
+
+- Gelecek satış tahminleri henüz ilgili dönemin gerçek satış sonuçlarıyla karşılaştırılmamıştır.
+- Model performansları daha fazla tahmin başlangıç tarihi üzerinden değerlendirilebilir.
+- Tatil, kampanya ve fiyat bilgileri gibi ek özellikler araştırılabilir.
+- Model parametreleri farklı optimizasyon yöntemleriyle geliştirilebilir.
+- PostgreSQL okuma bağlantıları SQLAlchemy kullanılarak iyileştirilebilir.
+- Satış tahminlerinin görüntülenebileceği bir web arayüzü geliştirilebilir.
+
+## 15. Sonuç
+
+Bu projede PostgreSQL veritabanı ile makine öğrenmesi teknolojilerini bir arada kullanarak mağaza satış tahmin sistemi geliştirdim.
+
+Geçmiş satış verilerini analiz ettim, üç farklı model oluşturdum ve modellerin performanslarını farklı değerlendirme yöntemleriyle karşılaştırdım.
+
+139 mağaza için oluşturduğum 59 günlük satış tahminlerini CSV dosyalarına ve PostgreSQL veritabanına kaydettim. Sonuçları grafikler ve SQL sorguları üzerinden analiz ettim.
+
+Bu proje sayesinde veritabanı yönetimi, veri analizi, makine öğrenmesi, model değerlendirme ve veri görselleştirme konularında uygulamalı deneyim kazandım.
+
+[Ayrıntılı proje raporu](reports/proje_raporu.txt)
+
+## 16. Geliştirici
+
+**Erva Kurt**
+
+Biruni Üniversitesi — Yazılım Mühendisliği
+
+[GitHub Profili](https://github.com/ervakurt)
