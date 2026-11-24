@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import psycopg2
 from getpass import getpass
@@ -8,9 +9,9 @@ df = pd.read_csv("data/product_hierarchy.csv")
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
-    database="retail_ml_db",
+    database=os.getenv("PGDATABASE", "retail_ml_db"),
     user="postgres",
-    password=getpass("PostgreSQL şifresi: ")
+    password=os.getenv("PGPASSWORD") or getpass("PostgreSQL şifresi: ")
 )
 
 cursor = conn.cursor()
@@ -32,6 +33,7 @@ for _, row in df.iterrows():
             hierarchy5_id
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (product_id) DO NOTHING
         """,
         (
             row["product_id"],

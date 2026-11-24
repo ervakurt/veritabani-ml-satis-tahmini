@@ -10,7 +10,7 @@ PostgreSQL veritabanı ile Python tabanlı makine öğrenmesi modellerini entegr
 
 ### Projenin öne çıkan özellikleri
 
-- Yaklaşık 19,4 milyon satış kaydı
+- 19.454.838 satış kaydı
 - 144 mağaza ve 699 üründen oluşan veri seti
 - Üç farklı makine öğrenmesi modeli
 - 139 mağaza için 59 günlük satış tahmini
@@ -41,7 +41,7 @@ Projede 2017–2019 yılları arasındaki satış, mağaza ve ürün verileri ku
 
 | Veri grubu | Kayıt sayısı |
 |---|---:|
-| Satış verileri | Yaklaşık 19,4 milyon |
+| Satış verileri | 19.454.838 |
 | Mağaza verileri | 144 |
 | Ürün verileri | 699 |
 | Eğitim verileri | 622.454 |
@@ -95,7 +95,27 @@ Ham veriler Python üzerinden PostgreSQL'e aktarılmıştır. Eğitim ve test ve
 | `satis_tahminleri_rf_iyilestirilmis` | İyileştirilmiş Random Forest tahminleri |
 | `satis_tahminleri_hist_gradient` | HistGradientBoosting tahminleri |
 
-Veritabanı şeması: [schema.sql](sql/schema.sql)
+### SQL Dosyaları
+
+| Dosya | Açıklama |
+|---|---|
+| [schema.sql](sql/schema.sql) | 19 tablonun ve indekslerin oluşturulması |
+| [veri_hazirlama.sql](sql/veri_hazirlama.sql) | Günlük mağaza satış verileri |
+| [egitim_test_hazirlama.sql](sql/egitim_test_hazirlama.sql) | Eğitim ve test verileri |
+| [gelecek_tahmin_hazirlama.sql](sql/gelecek_tahmin_hazirlama.sql) | 59 günlük tahmin verileri |
+| [analiz_sorgulari.sql](sql/analiz_sorgulari.sql) | Model ve mağaza analizleri |
+| [performans_analizi.sql](sql/performans_analizi.sql) | İndeks performans analizi |
+
+### Veritabanı Performansı
+
+magaza_gunluk tablosunda magaza_id ve tarih sütunları üzerinde birleşik B-tree indeksi kullanılmıştır.
+
+| Ölçüm | İndeksli | İndeks kullanımı kapalı |
+|---|---:|---:|
+| Ortalama çalışma süresi | 0,197 ms | 260,549 ms |
+| Bellek bloğu erişimi | 64 | 3310 |
+
+Üç ölçümün ortalamasına göre seçilen sorgunun çalışma süresi yaklaşık %99,92 azalmıştır. Bu sonuç kullanılan sorguya ve çalışma ortamına özeldir.
 
 ## 6. Veri Ön İşleme
 
@@ -258,6 +278,8 @@ Bu grafikler ilk Random Forest ve HistGradientBoosting modellerinin mağaza bazl
 ```text
 veritabani_ml_projesi/
 ├── data/
+├── docs/
+│   └── kurulum.md
 ├── models/
 ├── notebooks/
 ├── reports/
@@ -267,7 +289,12 @@ veritabani_ml_projesi/
 │   ├── proje_raporu.txt
 │   └── proje_raporu_taslak.txt
 ├── sql/
-│   └── schema.sql
+│   ├── schema.sql
+│   ├── veri_hazirlama.sql
+│   ├── egitim_test_hazirlama.sql
+│   ├── gelecek_tahmin_hazirlama.sql
+│   ├── analiz_sorgulari.sql
+│   └── performans_analizi.sql
 ├── src/
 ├── .gitignore
 ├── README.md
@@ -282,7 +309,8 @@ veritabani_ml_projesi/
 | reports/csv | Tahmin ve analiz sonuçları |
 | reports/grafikler | Veri görselleştirmeleri |
 | reports/gunluk_raporlar | Geliştirme ve analiz raporları |
-| sql | Veritabanı şeması |
+| sql | Veritabanı şeması, veri hazırlama ve analiz sorguları |
+| docs | Kurulum rehberi |
 | src | Python kaynak kodları |
 
 ## 12. Kurulum ve Çalıştırma
@@ -306,16 +334,37 @@ Proje kapsamında aşağıdaki kontroller gerçekleştirilmiştir:
 - Model performanslarının karşılaştırılması
 - Grafik oluşturma testleri
 - PostgreSQL kayıt işlemleri
-- Eksik sütun ve boş değer kontrolleri
-- Tekrar eden kayıt kontrolleri
+- Eksik sütun ve boş değer kontrol mekanizmalarının eklenmesi
+- Tekrar eden kayıt kontrol mekanizmalarının eklenmesi
 - Veritabanına yeniden kayıt sırasında mükerrer kayıt oluşmadığının kontrolü
 
-İyileştirilmiş Random Forest ve HistGradientBoosting tahminlerinin PostgreSQL'e tekrar kaydedilmesi sonucunda her iki tabloda da 8.201 kayıt bulunduğu doğrulanmıştır.
+Üç modelin tahminlerinin PostgreSQL'e kaydedilmesi test edilmiş ve her tahmin tablosunda 8.201 kayıt bulunduğu doğrulanmıştır.
+
+İlk Random Forest tahminlerinin kaydedilmesi için src/ilk_rf_veritabanina_kaydet.py dosyası eklenmiştir.
+
+### Ayrı Veritabanında Kurulum Testi
+
+Aynı PostgreSQL sunucusunda boş bir test veritabanı oluşturularak veri aktarımı ve SQL veri hazırlama aşamaları yeniden çalıştırılmıştır.
+
+| Kontrol | Sonuç |
+|---|---:|
+| Oluşturulan tablo | 19 |
+| Aktarılan ürün | 699 |
+| Aktarılan mağaza | 144 |
+| Aktarılan satış kaydı | 19.454.838 |
+| İçeriği eşleşen veri hazırlama tabloları | 9/9 |
+
+Dokuz veri hazırlama tablosunun kayıt sayıları ve MD5 içerik özetleri asıl veritabanıyla eşleşmiştir.
+
+Ürün ve mağaza verilerinin tekrar yüklenmesinde mükerrer kayıt oluşmadığı doğrulanmıştır. Dolu satış tablosuna yeniden veri aktarılması engellenmiştir.
+
+Aktarım sırasında hata oluşması durumundaki geri alma mekanizması kodda bulunmaktadır ancak aktarım ortasında hata oluşturularak ayrıca test edilmemiştir.
 
 Son kod düzenlemelerinden sonra mevcut eğitilmiş modeller kullanılmıştır. Modellerin sıfırdan yeniden eğitilmesi gerçekleştirilmemiştir.
 
 ## 14. Projenin Sınırlılıkları ve Gelecek Çalışmalar
 
+- Yeni bir ortamda model eğitimi dahil uçtan uca kurulum testi henüz gerçekleştirilmemiştir.
 - Gelecek satış tahminleri henüz ilgili dönemin gerçek satış sonuçlarıyla karşılaştırılmamıştır.
 - Model performansları daha fazla tahmin başlangıç tarihi üzerinden değerlendirilebilir.
 - Tatil, kampanya ve fiyat bilgileri gibi ek özellikler araştırılabilir.

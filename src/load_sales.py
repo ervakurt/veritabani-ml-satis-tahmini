@@ -1,25 +1,64 @@
+import os
 import pandas as pd
 import psycopg2
 from io import StringIO
 from getpass import getpass
+
 CSV_FILE = "data/sales.csv"
 CHUNK_SIZE = 50000
+
+COLUMNS = [
+    "product_id",
+    "store_id",
+    "date",
+    "sales",
+    "revenue",
+    "stock",
+    "price",
+    "promo_type_1",
+    "promo_bin_1",
+    "promo_type_2",
+    "promo_bin_2",
+    "promo_discount_2",
+    "promo_discount_type_2"
+]
 
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
-    database="retail_ml_db",
+    database=os.getenv("PGDATABASE", "retail_ml_db"),
     user="postgres",
-    password=getpass("PostgreSQL şifresi: ")
+    password=os.getenv("PGPASSWORD") or getpass(
+        "PostgreSQL sifresi: "
+    )
 )
 
 try:
     total_rows = 0
 
+    with conn.cursor() as cursor:
+        cursor.execute(
+            "LOCK TABLE sales IN SHARE ROW EXCLUSIVE MODE"
+        )
+
+        cursor.execute(
+            "SELECT EXISTS (SELECT 1 FROM sales)"
+        )
+
+        if cursor.fetchone()[0]:
+            raise RuntimeError(
+                "Sales tablosu dolu. Aktarim iptal edildi."
+            )
+
     for chunk_number, df in enumerate(
         pd.read_csv(CSV_FILE, chunksize=CHUNK_SIZE),
         start=1
     ):
+        if set(df.columns) != set(COLUMNS):
+            raise ValueError("CSV sutunlari uyumsuz.")
+
+        df = df[COLUMNS]
+
         buffer = StringIO()
 
         df.to_csv(
@@ -58,17 +97,25 @@ try:
                 buffer
             )
 
-        conn.commit()
-
         total_rows += len(df)
 
         print(
-            f"Parça {chunk_number} tamamlandı | "
-            f"Bu parça: {len(df):,} | "
+            f"Parca {chunk_number} islendi | "
+            f"Bu parca: {len(df):,} | "
             f"Toplam: {total_rows:,}"
         )
 
+    conn.commit()
+
+    print(
+        f"\nAktarim tamamlandi. "
+        f"Toplam {total_rows:,} satis kaydi aktarildi."
+    )
+
+except Exception:
+    conn.rollback()
+    print("Aktarim iptal edildi. Degisiklikler geri alindi.")
+    raise
+
 finally:
     conn.close()
-
-print(f"\nAktarım tamamlandı. Toplam {total_rows:,} satış kaydı aktarıldı.")
