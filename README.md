@@ -287,96 +287,14 @@ veritabani_ml_projesi/
 
 ## 12. Kurulum ve Çalıştırma
 
-### Projeyi klonlama
+Projenin çalıştırılması için Python 3.13 ve PostgreSQL 18 gereklidir.
 
-```bash
-git clone https://github.com/ervakurt/veritabani-ml-satis-tahmini.git
-cd veritabani-ml-satis-tahmini
-```
+Kurulum, veri aktarımı, model eğitimi ve satış tahmini adımları ayrıntılı kurulum rehberinde açıklanmıştır.
 
-### Sanal ortam oluşturma
+**[Kurulum ve Çalıştırma Rehberi](docs/kurulum.md)**
 
-```bash
-python -m venv venv
-```
+Ham veri dosyaları ve eğitilmiş modeller GitHub deposuna dahil edilmemiştir. Hazır tahmin sonuçları ve grafikler `reports/` klasöründe bulunmaktadır.
 
-Windows PowerShell üzerinde etkinleştirme:
-
-```powershell
-.\venv\Scripts\Activate.ps1
-```
-
-### Gerekli kütüphaneleri yükleme
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-### PostgreSQL veritabanını hazırlama
-
-PostgreSQL üzerinde aşağıdaki isimle bir veritabanı oluşturulmalıdır:
-
-```sql
-CREATE DATABASE retail_ml_db;
-```
-
-Oluşturulan veritabanında `sql/schema.sql` dosyası çalıştırılmalıdır.
-
-Ham veri dosyaları temin edilerek `data/` klasörüne yerleştirilmelidir.
-
-### Veri aktarımı
-
-```bash
-python src/load_products.py
-python src/load_stores.py
-python src/load_sales.py
-```
-
-Model eğitiminden önce gerekli eğitim, test ve gelecek tahmin veri yapıları hazırlanmalıdır.
-
-### Modelleri eğitme
-
-```bash
-python src/gelecek_tahmin_modeli.py
-python src/model_iyilestirme.py
-python src/hist_gradient_modeli.py
-```
-
-### Satış tahminlerini oluşturma
-
-```bash
-python src/59_gunluk_tahmin.py
-python src/iyilestirilmis_rf_59_gunluk_tahmin.py
-python src/hist_gradient_59_gunluk_tahmin.py
-```
-
-### Model performanslarını karşılaştırma
-
-```bash
-python src/model_secimi.py
-```
-
-### Tahminleri PostgreSQL'e kaydetme
-
-```bash
-python src/rf_tahminlerini_veritabanina_kaydet.py
-python src/hist_gradient_veritabanina_kaydet.py
-```
-
-### Karşılaştırma ve grafik oluşturma
-
-```bash
-python src/uc_model_tahmin_karsilastirma.py
-python src/uc_model_tahmin_grafigi.py
-```
-
-**Kurulum notları:**
-
-- PostgreSQL sunucusunun çalışıyor olması gerekmektedir.
-- Veritabanı şifresi kaynak kodlarda saklanmamaktadır.
-- Ham CSV verileri ve eğitilmiş PKL model dosyaları GitHub deposuna dahil edilmemiştir.
-- Tahminlerin yeniden oluşturulabilmesi için gerekli veriler, veritabanı yapıları ve eğitilmiş modeller hazırlanmalıdır.
-- Kurulumun sıfırdan tamamlanması ayrıca doğrulanmalıdır.
 
 ## 13. Test ve Doğrulama
 
