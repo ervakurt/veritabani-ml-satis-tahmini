@@ -27,3 +27,4 @@ models/*.pkl
 
 # Gecici dosyalar
 *.log
+.streamlit/secrets.toml

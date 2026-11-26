@@ -203,4 +203,59 @@ Sonuçlar kullanılan sorguya ve çalışma ortamına özeldir.
 - Docker kullanımı zorunlu değildir.
 - Ayrı bir test veritabanında 19 tablo oluşturulmuş, 699 ürün, 144 mağaza ve 19.454.838 satış kaydı yüklenmiştir. Dokuz veri hazırlama tablosunun kayıt sayıları ve MD5 içerik özetleri asıl veritabanıyla eşleşmiştir. Model eğitimi sıfırdan tekrarlanmamıştır.
 
+## 15. Streamlit Kullanıcı Arayüzü
+
+Projenin kullanıcı arayüzü Streamlit 1.67.0 kullanılarak geliştirilmiştir.
+
+Gerekli paketler requirements.txt dosyasına eklenmiştir.
+
+### Veritabanı Bağlantı Ayarları
+
+PostgreSQL sunucusunun çalışır durumda olması ve önceki kurulum adımlarının tamamlanması gerekmektedir.
+
+Proje ana dizininde aşağıdaki komutlar çalıştırılır:
+
+```powershell
+New-Item -ItemType Directory -Force .streamlit
+notepad .\.streamlit\secrets.toml
+```
+
+Oluşturulan secrets.toml dosyasına aşağıdaki yapılandırma eklenir:
+
+```toml
+[postgresql]
+password = "POSTGRESQL_SIFRENIZ"
+```
+
+Örnek şifre yerine kullanıcının kendi PostgreSQL şifresi yazılmalıdır.
+
+Bu dosya güvenlik nedeniyle GitHub deposuna dahil edilmemektedir.
+
+### Arayüzün Çalıştırılması
+
+```powershell
+python -m streamlit run app.py --server.address 127.0.0.1
+```
+
+Tarayıcı üzerinden aşağıdaki adrese erişilir:
+
+http://127.0.0.1:8501
+
+### Arayüz Bölümleri
+
+- Genel Bakış
+- Satış Tahminleri
+- Model Karşılaştırması
+- Mağaza Analizi
+- Veritabanı Analizi
+
+Arayüz PostgreSQL veritabanına salt okunur olarak bağlanmaktadır. Mevcut tabloları veya eğitilmiş modelleri değiştirmemektedir.
+
+Model performans ve indeks performans değerleri daha önce gerçekleştirilen ölçümlere dayanmaktadır.
+
+### Uygulamanın Durdurulması
+
+PowerShell ekranında Ctrl + C tuşlarına basılarak Streamlit uygulaması durdurulabilir.
+
+
 [Ana proje sayfasına dön](../README.md)
