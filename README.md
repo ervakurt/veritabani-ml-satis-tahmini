@@ -434,8 +434,7 @@ veritabani_ml_projesi/
 │   ├── csv/
 │   ├── grafikler/
 │   ├── gunluk_raporlar/
-│   ├── proje_raporu.txt
-│   └── proje_raporu_taslak.txt
+│   └── proje_raporu.pdf
 ├── sql/
 │   ├── schema.sql
 │   ├── veri_hazirlama.sql
@@ -663,3 +662,7 @@ Bu proje sayesinde veritabanı yönetimi, veri analizi, makine öğrenmesi, mode
 Biruni Üniversitesi — Yazılım Mühendisliği
 
 [GitHub Profili](https://github.com/ervakurt)
+
+## Proje Raporu ve Medium Yazısı
+- [Proje Raporu(PDF)](reports/proje_raporu.pdf)
+- [Medium Makalesi](https://medium.com/p/fe9510b7775c)
